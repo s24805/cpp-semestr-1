@@ -149,7 +149,7 @@ Czego uczy?
 
 - składniki języka:
     - sekwencja
-    - alternatywa (użytkownik albo podał, albo nie podał swojego imienia)
+    - alternatywa (`if`: użytkownik albo podał, albo nie podał swojego imienia)
 
 - "Hello, John Doe!"
 - 01-hello-input.cpp
@@ -159,9 +159,28 @@ Zacommitować, wypchnąć do repozytorium.
 
 --------------------------------------------------------------------------------
 
-# lekcja X
+# lekcja 3
 
-- add, subtract, multiply, divide
+Czego uczy?
+
+- składniki języka:
+    - alternatywa (`switch`: żeby wybrać jaką operację ma wykonać kalkulator)
+    - obsługa błędów (`try`: żeby konwertować liczby; `std::cerr`: żeby
+      poinformować o błędach)
+    - iteration (`while`: żeby zapewnić dłuższe działanie kalkulatora)
+
+Zaimplementować kalkulator, który:
+
+1. wczyta jedną liczbę
+2. wczyta drugą liczbę
+3. wczyta operację do wykonania
+4. poda wynik
+5. wróci do kroku 1.
+
+- 02-very-basic-calculator.cpp
+- calculator.cpp (ich plik)
+
+Zacommitować, wypchnąć do repozytorium.
 
 --------------------------------------------------------------------------------
 
