@@ -1,0 +1,8 @@
+*.o
+*.so
+*.bin
+
+.*
+!.gitkeep
+!.gitignore
+!.clang-format
