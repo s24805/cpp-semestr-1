@@ -135,10 +135,27 @@ Czego uczy?
 - "Hello, World!"
 - 00-hello-world.cpp (przykład)
 - main.cpp (ich plik)
-- zacommitować, wypchnąć
+
+Zacommitować, wypchnąć do repozytorium.
 
 --------------------------------------------------------------------------------
 
+# lekcja 2
+
+Czego uczy?
+
+- odczytywanie danych ze standardowego wejścia
+- wywołania funkcji
+
+- składniki języka:
+    - sekwencja
+    - alternatywa (użytkownik albo podał, albo nie podał swojego imienia)
+
+- "Hello, John Doe!"
+- 01-hello-input.cpp
+- john.cpp (ich plik)
+
+Zacommitować, wypchnąć do repozytorium.
 
 --------------------------------------------------------------------------------
 

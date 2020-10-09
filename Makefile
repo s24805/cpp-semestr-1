@@ -15,7 +15,8 @@ CXXFLAGS=\
 		 $(CXXINCLUDES)
 
 all:\
-	build/0-hello-world.bin
+	build/00-hello-world.bin \
+	build/01-hello-input.bin
 
 format:
 	@find ./src -name '*.cpp' | xargs -n 1 --no-run-if-empty --verbose clang-format -i
