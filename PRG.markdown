@@ -1,7 +1,7 @@
 # sprawy organizacyjne
 
 - przedstawienie się:
-    - email: marecki@pjatk.edu.pl
+    - email: marecki@pjwstk.edu.pl
     - szuflandia: szuflandia.pjwstk.edu.pl/~marecki
     - strona: edu.marecki.me/~marecki
     - pisać z problemami, będę pomagać
