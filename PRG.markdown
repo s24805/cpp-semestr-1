@@ -1,10 +1,16 @@
-# zjazd 0
+# sprawy organizacyjne
 
-- przedstawienie się
+- przedstawienie się:
+    - email: marecki@pjatk.edu.pl
+    - szuflandia: szuflandia.pjwstk.edu.pl/~marecki
+    - strona: edu.marecki.me/~marecki
+    - pisać z problemami, będę pomagać
 - lista studentów, lista obecności
 - zwolnienie z zajęć (CV, doświadczenie)
 - dystrybucja VM
 - prezentacja narzędzi (Github, Git, konsola, GCC)
+
+--------------------------------------------------------------------------------
 
 # lekcja 0
 
@@ -87,6 +93,11 @@
     - zakaz używania `using namespace std;`
     - zaliczenia tylko na Linux
     - zaliczenie prezentacją projektu (plus minimalna obecność)
+
+Wszyscy mają mieć założone repozytorium na Github, Gitlab, Szuflandii,
+gdziekolwiek. Ważne żeby mieli gdzie trzymać kod.
+
+--------------------------------------------------------------------------------
 
 # lekcja 2
 
