@@ -99,15 +99,55 @@ gdziekolwiek. Ważne żeby mieli gdzie trzymać kod.
 
 --------------------------------------------------------------------------------
 
-# lekcja 2
+# lekcja 1
+
+Czego uczy?
+
+- definicja funkcji w C++:
+    - nazwa
+    - lista parametrów (parametrów formalnych)
+    - typ zwracany
+    - ciało funkcji
+- dołączanie nagłówków w C++
+
+- składniki języka:
+    - abstrakcja (funkcja)
+    - sekwencja (najpierw print, potem return)
+
+------------------------------------------------------------
+
+- slajdy linijka po linijce, element po elemencie
+    - *#include <iostream>*
+    - *auto main*
+    - auto main*()*
+    - auto main() *-> int*
+    - {}
+    - *std::cout <<*
+    - std::cout << *"Hello, World!\n"*
+    - std::cout << "Hello, World!\n"*;*
+    - *return 0*;
+
+- kompilacja i uruchomienie:
+    - g++ -std=c++17 main.cpp
+    - ./a.out
+    - dlaczego plik wynikowy nazywa się `a.out`?
 
 - "Hello, World!"
-- "Hello, ...!"
+- 00-hello-world.cpp (przykład)
+- main.cpp (ich plik)
+- zacommitować, wypchnąć
 
-# lekcja 3
+--------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------
+
+# lekcja X
 
 - add, subtract, multiply, divide
 
-# lekcja 4
+--------------------------------------------------------------------------------
+
+# lekcja X
 
 - guessing game
