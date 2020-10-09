@@ -17,6 +17,10 @@ CXXFLAGS=\
 all:\
 	build/0-hello-world.bin
 
+format:
+	@find ./src -name '*.cpp' | xargs -n 1 --no-run-if-empty --verbose clang-format -i
+	@find ./include -name '*.h' 2>/dev/null | xargs -n 1 --no-run-if-empty --verbose clang-format -i
+
 build/%.bin: build/%.o
 	$(CXX) $(CXXFLAGS) -o $@ $<
 
