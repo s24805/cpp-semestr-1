@@ -114,6 +114,10 @@ Czego uczy?
     - abstrakcja (funkcja)
     - sekwencja (najpierw print, potem return)
 
+- typy danych:
+    - int
+    - string
+
 ------------------------------------------------------------
 
 - slajdy linijka po linijce, element po elemencie
@@ -133,8 +137,15 @@ Czego uczy?
     - dlaczego plik wynikowy nazywa się `a.out`?
 
 - "Hello, World!"
-- 00-hello-world.cpp (przykład)
-- main.cpp (ich plik)
+- src/00-hello-world.cpp (przykład)
+- src/s00-hello-world.cpp (plik studenta)
+
+----------------------------------------
+
+### Zadania
+
+- skompilować i wykonać "Hello, World!"
+- zmienić "World" na swoje imię, skompilować i wykonać
 
 Zacommitować, wypchnąć do repozytorium.
 
@@ -146,14 +157,40 @@ Czego uczy?
 
 - odczytywanie danych ze standardowego wejścia
 - wywołania funkcji
+- wywołania funkcji składowych
 
 - składniki języka:
     - sekwencja
     - alternatywa (`if`: użytkownik albo podał, albo nie podał swojego imienia)
 
+- typy danych:
+    - int
+    - string
+
+------------------------------------------------------------
+
 - "Hello, John Doe!"
-- 01-hello-input.cpp
-- john.cpp (ich plik)
+- src/01-hello-input.cpp
+- src/01-hello-argv.cpp
+- src/s01-input.cpp (plik studenta)
+- src/s01-mr-or-mrs.cpp (plik studenta)
+
+----------------------------------------
+
+### Zadania
+
+- zmienić kod (s01-input.cpp) tak żeby pytał o imię i nazwisko
+    - jeśli podane jest tylko imię: wydrukować "Hi, ..."
+    - jeśli podane jest tylko nazwisko: wydrukować "It's you, ..."
+    - jeśli podane jest imię i nazwisko: wydrukować "Hello, ..."
+    - jeśli nic nie jest podane: wydrukować "OK, keep your secrets"
+
+- wiedząc, że funkcja składowa `std::string::back()` (wywołanie `s.back()`)
+  zwraca ostatni znak napisu, napisz program, który wczyta z wiersza poleceń
+  imię, a potem powie czy imię to "Pan" czy "Pani":
+    - dla "Kasia" drukuje "Pani Kasia"
+    - dla "Zbyszek" drukuje "Pan Zbyszek"
+    - dodać obsługę błędów dla pustego napisu
 
 Zacommitować, wypchnąć do repozytorium.
 
@@ -168,6 +205,44 @@ Czego uczy?
     - obsługa błędów (`try`: żeby konwertować liczby; `std::cerr`: żeby
       poinformować o błędach)
     - iteration (`while`: żeby zapewnić dłuższe działanie kalkulatora)
+- definiowanie stałych (lhs, rhs, action)
+- definiowanie zmiennych (result)
+- przypisanie do zmiennej
+
+------------------------------------------------------------
+
+- src/02-very-basic-calculator.cpp
+- src/03-loops-intro.cpp
+- src/s02-calculator.cpp (plik studenta)
+- src/s03-fizzbuzz.cpp (plik studenta)
+- src/s03-fizzbuzz-turbo.cpp (plik studenta)
+- src/s02-echo.cpp (plik studenta)
+
+----------------------------------------
+
+### Zadanie
+
+- do very-basic calculator dodać operacje mnożenia i dzielenia
+
+- zaimplementować Fizz-Bizz (s03-fizzbuzz.cpp)
+    - iteracja dowolną pętlą
+    - zakres: od 1 do 30 włącznie
+    - drukuje liczbę, spację, a potem...
+        - jeśli liczba podzielna przez 3 to drukuje "Fizz"
+        - jeśli liczba podzielna przez 5 to drukuje "Buzz"
+        - jeśli liczba podzielna przez 3 i 5 to drukuje "FizzBuzz"
+- niech FizzBuzz (s03-fizzbuzz-turbo.cpp) na początek wczytuje jako argumenty
+  wiersza poleceń
+    - pierwszą liczbę do testowania
+    - drugą liczbę do testowania
+    - początek zakresu
+    - koniec zakresu
+    - poza tym, tak samo jak zwykły fizzbuzz
+
+- napisać program, który w pętli wypisze po kolei argumenty z wiersza poleceń
+  (takie `echo(1)`)
+- do tego programu dodać opcję `-n`: jeśli `-n` jest pierwszym argumentem to nie
+  drukować znaku nowej linii
 
 Zaimplementować kalkulator, który:
 
@@ -177,8 +252,8 @@ Zaimplementować kalkulator, który:
 4. poda wynik
 5. wróci do kroku 1.
 
-- 02-very-basic-calculator.cpp
-- calculator.cpp (ich plik)
+Wymagane operacje to dodawanie, odejmowanie, mnożenie, dzielenie, i reszta z
+dzielenia. Dla chętnych potęgowanie, silnia, i inne dwuargumentowe funkcje.
 
 Zacommitować, wypchnąć do repozytorium.
 

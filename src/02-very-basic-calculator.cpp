@@ -12,7 +12,7 @@ auto read_int_from_stdin(std::string prompt) -> int
         std::cout << prompt;
         std::getline(std::cin, s);
         return std::stoi(s);
-    } catch (int const) {
+    } catch (std::invalid_argument const&) {
         return 0;
     }
 
@@ -34,6 +34,9 @@ auto main() -> int
         break;
     case '-':
         result = (left_hand_operand - right_hand_operand);
+        break;
+    case '%':
+        result = (left_hand_operand % right_hand_operand);
         break;
     default:
         // return 1 to signal that an error occured
