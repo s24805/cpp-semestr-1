@@ -23,7 +23,7 @@ code, installed on your system. Supported compilers are GCC and Clang.
 
 To run compiled program execute the following command:
 
-    $ ./build/0-example-name.bin
+    $ ./build/00-example-name.bin
 
 To clean the build directory execute the following command:
 
