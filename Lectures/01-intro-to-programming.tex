@@ -809,6 +809,105 @@ moredelim=**[is][\color{red}]{@}{@}}
 \begin{frame}
     \frametitle{I/O}
     \framesubtitle{Składniki języka C++}
+
+    C++ korzysta z mechanizmów I/O dostarczanych przez API systemu operacyjnego
+    (np. Linux), ale część z nich opakowuje w swoje własne abstrakcje
+    zapewniając programom przenośność.
+\end{frame}
+
+\begin{frame}
+    \frametitle{I/O - standard steams}
+    \framesubtitle{Składniki języka C++}
+
+    W momencie uruchomienia dla większości programów tworzone są 3 standardowe
+    strumienie: wejścia, wyjścia, i błędów.
+
+    \begin{labeling}{{\tt std::cerr}}
+    \item[{\tt std::cin}] standardowy strumień wejścia, służy do odczytu danych
+        podawanych przez użytkownika w konsoli tekstowej (\emph{file descriptor
+        0})
+    \item[{\tt std::cout}] standardowy strumień wyjścia, służy do prezentacji
+        wyników działania programu w konsoli tekstowej (\emph{file descriptor
+        1})
+    \item[{\tt std::cerr}] standardowy strumień błędów, służy do prezentacji
+        błędów działania i awarii programu w konsoli tekstowej (\emph{file
+        descriptor 2})
+    \end{labeling}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{I/O - standard steams}
+    \framesubtitle{Składniki języka C++}
+
+    {\scriptsize
+    \begin{lstlisting}
+    {
+        std::string line;
+
+        // read a line of text from standard input
+        std::getline(std::cin, line);
+    }
+
+    // display a message to inform user of what is happening...
+    std::cerr << "connecting to server...\n";
+
+    // ...or notify them about errors
+    std::cerr << "connection failed\n";
+
+    // display results of program's work
+    std::cout << downloaded_data << '\n';
+    \end{lstlisting}}
+\end{frame}
+
+\begin{frame}
+    \frametitle{I/O - files}
+    \framesubtitle{Składniki języka C++}
+
+    C++ definiuje typy {\tt std::ifstream} (\emph{input file stream}) i
+    {\tt std::ofstream} (\emph{output file stream}) w bibliotece standardowej.
+
+    \vspace{1em}
+
+    Jeśli ich interfejs nie jest wystarczający zawsze można użyć interfejsu
+    platformy, np. wywołań systemowych definiowanych przez standard POSIX --
+    {\tt open(3)}, {\tt write(3)}, {\tt read(3)}, i {\tt close(3)}.
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{I/O - files ({\tt std::ifstream} and {\tt std::ofstream})}
+    \framesubtitle{Składniki języka C++}
+
+    {\scriptsize
+    \begin{lstlisting}
+    auto path = std::string{"./data.txt"};
+
+    {
+        // write line to a file
+        auto out = std::ofstream{ path };
+        if (out.good()) {
+            out << "Hello, World!\n";
+        }
+    }
+
+    {
+        // read line from a file
+        auto in = std::ifstream{ path };
+        if (in.good()) {
+            auto line = std::string{};
+            std::getline(in, line);
+            std::cout << line << "\n";
+        }
+    }
+    \end{lstlisting}}
+\end{frame}
+
+\begin{frame}
+    \frametitle{I/O - network}
+    \framesubtitle{Składniki języka C++}
+
+    Komunikacja po sieci odbywa się z wykorzystaniem mechanizmów I/O
+    dostarczanych przez standard POSIX -- {\tt socket(2)}, {\tt connect(2)},
+    {\tt inet\_pton(3)}.
 \end{frame}
 
 \end{document}
