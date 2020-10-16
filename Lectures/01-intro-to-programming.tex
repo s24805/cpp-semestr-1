@@ -354,6 +354,24 @@ moredelim=**[is][\color{red}]{@}{@}}
     \end{enumerate}
 \end{frame}
 
+\begin{frame}
+    \frametitle{Operacje wejścia-wyjścia}
+    \framesubtitle{I/O}
+
+    Sposób na interakcję i wymianę danych ze ''światem zewnętrznym'', czyli
+    wszystkim tym co dzieje się poza CPU i pamięcią operacyjną (RAM).
+
+    \begin{enumerate}
+        \item \emph{I/O port}, \emph{MMU} (ang. \emph{memory management unit})
+        \item \emph{file-descriptor}, \emph{socket} (ten sam interfejs dla
+            plików i połączeń w sieci; POSIX)
+        \item \emph{memory-mapped file}
+    \end{enumerate}
+
+    Zapisując i odczytując bajty da się obsłużyć każdy rodzaj urządzenia -
+    monitor, klawiaturę, dysk, ramię robota, silnik, itd.
+\end{frame}
+
 \section{C++}
 
 \section{Zastrzeżenia}
