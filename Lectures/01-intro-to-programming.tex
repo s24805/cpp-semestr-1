@@ -40,11 +40,147 @@ moredelim=**[is][\color{red}]{@}{@}}
 
 \section{Rys historyczny}
 
+\begin{frame}
+    \frametitle{Środek historii}
+    \framesubtitle{...czyli 150 lat do CPU}
+
+    {\small
+    \begin{labeling}{1822}
+    \item[1822] Difference Engine\footnote{{\tiny skonstruowany w londyńskim
+        Science Museum w 1991}} -- Charles Babbage
+    \item[1837] Analytical Engine -- Charles Babbage hardware\footnote{\tiny
+        zbudował prototyp CPU w 1871} \footnote{{\tiny w 1906 jego syn, Henry Babbage,
+        zbuduje kompletene CPU}}, a Ada Lovelace software
+    \item[1941] Konrad Zuse -- Z3, pierwszy programowalny
+        komputer\footnote{{\tiny zniszczony podczas bombardowania Berlina przez
+        Aliantów}}
+    \item[1944] Harvard Mark I -- drugi programowalny komputer
+    \item[1971] Intel 4004 -- 4-bitowy mikroprocesor
+    \end{labeling}}
+
+    W 2016 UK pozwoliło sprzedać ARM -- czyli po raz drugi wypuścili z rąk ważny
+    kawałek technologii.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Architektury CPU}
+
+    \begin{labeling}{1837}
+        \item[1837] Analytical Engine
+        \item[1978] x86
+        \item[1985] ARM, MIPS
+        \item[1991] PowerPC
+        \item[2001] Itanium {\tiny (VLIW; \emph{failed})}
+        \item[2003] Mill {\tiny (VLIW; \emph{in development})}
+        \item[2010] RISC-V
+    \end{labeling}
+\end{frame}
+
 \section{Wstęp do komputerów}
+
+\begin{frame}
+    \frametitle{von Neumann}
+
+    \begin{enumerate}
+        \item CPU
+        \item RAM
+        \item pamięć masowa
+        \item I/O
+    \end{enumerate}
+\end{frame}
 
 \section{Wstęp do języków programowania}
 
+\begin{frame}
+    \frametitle{A co to?}
+
+    Sposób na wyrażenie swoich żądań względem maszyny.
+
+    \vspace{1em}
+
+    Kontrakt z demonem -- spełnia rozkazy \emph{dokładnie tak jak są
+    wypowiedziane}, bez oglądania się na \emph{intencje} programisty.
+\end{frame}
+
+\begin{frame}
+    \frametitle{A po co to komu?}
+    {\tt mov eax, 0x2a} \textsubscript{(x86)}\\
+    vs\\
+    {\tt auto x = int\{42\};} \textsubscript{(C++)}
+
+    \vspace{2em}
+
+    Dużo prostsze wydawanie maszynie skomplikowanych rozkazów, i łatwość
+    zrozumienia znaczenia programu.\\
+    Automatyczna alokacja rejestrów i pamięci; automatyczne skoki; ergonomiczna
+    semantyka.
+
+    \vspace{1em}
+
+    Przenośność (ang. \emph{portability}) programów między platformami.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Umowny podział}
+
+    \begin{enumerate}
+        \item compiled \emph{vs} interpreted (JIT?)
+        \item typing: static \emph{vs} dynamic, strong \emph{vs} weak
+        \item paradigm\footnote{Seven Languages in Seven Weeks; Bruce A. Tate;
+            ISBN-13: 978-1-934356-59-3}: functional \emph{vs} object-oriented
+            \emph{vs} structural \emph{vs} prototype-based \emph{vs} ...
+        \item rodziny: C-like (pochodne po języku ALGOL), ML-like, Lisp-like
+    \end{enumerate}
+
+    \vspace{1em}
+
+    \begin{labeling}{Smalltalk}
+        \item[C] compiled, static-weak typing, structural
+        \item[C++] compiled, static-strong typing, multiparadigm
+        \item[Smalltalk] interpreted, dynamic-strong, object-oriented
+        \item[OCaml] compiled, static-strong, functional
+        \item[Perl] interpreted, dynamic-weak, multiparadigm
+    \end{labeling}
+\end{frame}
+
 \section{Składniki języka}
+
+\begin{frame}
+    \frametitle{Co jest potrzebne w języku?}
+
+    ?{\tiny \textsubscript{(pytanie do sali)}}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Jackson Structured Programming}
+    \framesubtitle{Michael Jackson, 1975; Principles of Program Design}
+
+    \begin{enumerate}
+        \item \emph{sequence} -- sekwencjonowanie, czyli ustalenie kolejności
+            wykonywania operacji
+        \item \emph{selection} (\emph{alternative}) -- wybór (alternatywa),
+            czyli decyzja o podjęciu jednej z kilku różnych ścieżek wykonania
+        \item \emph{iteration} -- iteracja, czyli powtarzanie tych samych kroków
+            $n$ razy
+    \end{enumerate}
+
+    \vspace{1em}
+
+    Nadaje się do opisu algorytmów, ale nie za bardzo do czegoś więcej. Często
+    tak jest z różnymi modelami.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Z punktu widzenia programisty}
+
+    \begin{enumerate}
+        \item \emph{control flow} -- mechanizmy przepływu kontroli, czyli
+            sterowania programem
+        \item \emph{data structures} -- reprezentacja struktur danych
+        \item \emph{I/O} -- zapis i odczyt danych, czyli sposób na interakcję ze
+            światem zewnętrznym
+    \end{enumerate}
+\end{frame}
 
 \section{C++}
 
