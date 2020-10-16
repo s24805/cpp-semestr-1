@@ -902,12 +902,125 @@ moredelim=**[is][\color{red}]{@}{@}}
 \end{frame}
 
 \begin{frame}
-    \frametitle{I/O - network}
+    \frametitle{I/O - sieć}
     \framesubtitle{Składniki języka C++}
 
     Komunikacja po sieci odbywa się z wykorzystaniem mechanizmów I/O
-    dostarczanych przez standard POSIX -- {\tt socket(2)}, {\tt connect(2)},
-    {\tt inet\_pton(3)}.
+    dostarczanych przez standard POSIX --
+    {\tt socket(2)},
+    {\tt bind(2)},
+    {\tt listen(2)},
+    {\tt accept(2)},
+    {\tt connect(2)},
+    {\tt inet\_pton(3)},
+    {\tt connect(3)},
+    {\tt shutdown(3)},
+    {\tt close(3)}.
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{I/O - sieć (nagłówki)}
+    \framesubtitle{Składniki języka C++}
+
+    Pliki nagłówkowe, które należy dodać na początku pliku z kodem źródłowym
+    żeby móc bez przeszkód korzystać z funkcji pozwalających na komunikację po
+    sieci:
+
+    {\small
+    \begin{lstlisting}
+    #include <arpa/inet.h>
+    #include <endian.h>
+    #include <netinet/ip.h>
+    #include <string.h>
+    #include <sys/types.h>
+    #include <sys/socket.h>
+    #include <sys/un.h>
+    #include <unistd.h>
+    \end{lstlisting}}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{I/O - sieć (klient)}
+    \framesubtitle{Składniki języka C++}
+
+    {\scriptsize
+    \begin{lstlisting}
+    auto sock = socket(AF_INET, SOCK_STREAM, 0);
+
+    auto const ip = std::string{"127.0.0.1"};
+    auto const port = uint16_t{42420};
+
+    sockaddr_in server;
+    memset(&server, 0, sizeof(server));
+    server.sin_family = AF_INET;
+    server.sin_port = htobe16(port);
+    inet_pton(AF_INET, ip.c_str(), reinterpret_cast<void*>(&server.sin_addr));
+
+    connect(sock, reinterpret_cast<sockaddr*>(&server), sizeof(server));
+
+    auto const data = std::string{"Hello, World!"};
+    write(sock, data.c_str(), data.size());
+
+    shutdown(sock, SHUT_RDWR);
+    close(sock);
+    \end{lstlisting}}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{I/O - sieć (serwer, część $\frac{1}{2}$)}
+    \framesubtitle{Składniki języka C++}
+
+    {\tiny
+    \begin{lstlisting}
+    auto sock = socket(AF_INET, SOCK_STREAM, 0);
+
+    auto const ip = std::string{"127.0.0.1"};
+    auto const port = uint16_t{42420};
+
+    sockaddr_in server;
+    memset(&server, 0, sizeof(server));
+
+    server.sin_family = AF_INET;
+    server.sin_port = htobe16(port);
+
+    inet_pton(AF_INET, ip.c_str(), reinterpret_cast<void*>(&server.sin_addr));
+
+    bind(sock, reinterpret_cast<sockaddr*>(&server), sizeof(server));
+    listen(sock, 0);  // default limit of waiting connections
+    \end{lstlisting}}
+
+    W ten sposób przygotuje się socket do odbierania połączeń.
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{I/O - sieć (serwer, część $\frac{2}{2}$)}
+    \framesubtitle{Składniki języka C++}
+
+    {\tiny
+    \begin{lstlisting}
+    sockaddr_in client_addr;
+    memset(&client_addr, 0, sizeof(client_addr));
+    auto client_len = socklen_t{sizeof(client_addr)};
+    auto client = accept(sock,
+        reinterpret_cast<sockaddr*>(&client_addr), &client_len);
+    {
+        // report client's address
+        std::array<char, INET_ADDRSTRLEN + 1> buffer {};
+        inet_ntop(AF_INET, &client_addr.sin_addr, buffer.data(), buffer.size());
+        std::cout << buffer.data() << ':' << be16toh(client_addr.sin_port) << "\n";
+    }
+    {
+        // read data from client
+        std::array<char, 512> buffer {};
+        auto const n = read(client, buffer.data(), buffer.size());
+        std::cout << std::string{buffer.data(), buffer.data() + n} << "\n";
+    }
+
+    shutdown(sock, SHUT_RDWR);
+    close(sock);
+    \end{lstlisting}}
+
+    W ten sposób odbiera się połączenia i rejestruje adres połączonego klienta.
 \end{frame}
 
 \end{document}
