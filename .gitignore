@@ -8,6 +8,8 @@
 *.out
 *.snm
 *.toc
+*.vrb
+
 *.pdf
 
 .*
