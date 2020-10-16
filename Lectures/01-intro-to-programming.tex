@@ -14,6 +14,8 @@
 \usepackage{listings}
 \usepackage{epigraph}
 
+\renewcommand{\epigraphsize}{\scriptsize}
+
 \usetheme{-bjeldbak/beamerthemebjeldbak}
 
 \definecolor{xbarcolor}{HTML}{0f2f0f}
@@ -380,6 +382,433 @@ moredelim=**[is][\color{red}]{@}{@}}
 
 \section{C++}
 
-\section{Zastrzeżenia}
+\begin{frame}
+    \frametitle{Składniki języka C++}
+
+    \begin{epigraphs}
+    \qitem{Piękno, harmonia, wdzięk, dobry rytm - wszystkie zależą od
+    prostoty.}{Platon, \emph{Republika}}
+    \qitem{If you think it's simple, then you have misunderstood the
+    problem.}{Bjarne Stroustrup, autor języka C++}
+    \end{epigraphs}
+
+    C++ jest rozbudowanym językiem oferującym wiele możliwości. Ceną za to jest
+    jego ogromne skomplikowanie, brak ''elegancji'', i pułapki czychające na
+    nieuważnego programistę.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Control flow - sequence}
+    \framesubtitle{Składniki języka C++}
+
+    Kontrola w języku C++ zaczyna się od pierwszej instrukcji w funkcji
+    {\tt main()}. Kolejne instrukcje wykonywane są w kolejności zdefiniowanej w
+    kodzie źródłowym i oddzielone operatorem \textbf{{\tt ;}}
+
+    \vspace{1em}
+
+    Grupy instrukcji są ograniczane nawiasami klamrowymi \textbf{{\tt \{ \}}} i
+    traktowane jako pojedyncza (ale nie atomowa!) instrukcja.
+
+    \vspace{1em}
+
+    Wewnątrz instrukcji, kolejnością wykonania streuje również operator
+    \textbf{{\tt ,}}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Control flow - sequence}
+    \framesubtitle{Składniki języka C++}
+
+    \begin{lstlisting}
+    auto x = 42;    // pierwsza instrukcja
+    auto y = x;     // druga instrukcja
+    print(y);       // trzecia instrukcja
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Control flow - selection}
+    \framesubtitle{Składniki języka C++}
+
+    \begin{labeling}{{\tt if-else}}
+        \item[{\tt if-else}] wybiera następną instrukcję do wykonania na
+            podstawie wartości logicznej dowolnego wyrażenia
+        \item[{\tt switch}] wybiera nastepną instrukcję do wykonania na
+            podstawie wartości typu wyliczeniowego (\emph{enum})
+    \end{labeling}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Control flow - selection ({\tt if})}
+    \framesubtitle{Składniki języka C++}
+
+    \begin{lstlisting}
+    if (x < y) {
+        std::cout << "x less than y\n";
+    } else if (x > y) {
+        std::cout << "x greater than y\n";
+    } else if (x == y) {
+        std::cout << "x equals y\n";
+    } else {
+        std::cout << "something else\n";
+    }
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Control flow - selection ({\tt switch})}
+    \framesubtitle{Składniki języka C++}
+
+    \begin{lstlisting}
+    switch (x) {
+        case Maybe::Something:
+            std::cout << "it's something\n";
+            break;
+        case Maybe::Nothing:
+            std::cout << "it's nothing\n";
+            break;
+        default:
+            std::cout << "it's weird\n";
+            break;
+    }
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Control flow - iteration}
+    \framesubtitle{Składniki języka C++}
+
+    \begin{labeling}{{\tt do-while}}
+        \item[{\tt while}] pętla wykonująca się dopóki wyrażenie kontrolne jest
+            prawdziwe, ze sprawdzeniem przed wykonaniem instrukcji
+        \item[{\tt do-while}] pętla wykonująca się dopóki wyrażenie kontrolne
+            jest prawdziwe, ze sprawdzeniem po wykonaniu instrukcji
+        \item[{\tt for}] pętla po zakresie
+    \end{labeling}
+
+    \vspace{1em}
+
+    Pętla {\tt while} jest najbardziej ogólną pętlą, ale wszystkie rodzaje są
+    równoważne (każdą z pętli da się zaimplementować w ramach każdej innej).
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Control flow - iteration ({\tt while})}
+    \framesubtitle{Składniki języka C++}
+
+    \begin{lstlisting}
+    while (its_sunny_outside()) {
+        std::cout << "weather is nice\n";
+    }
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Control flow - iteration ({\tt do-while})}
+    \framesubtitle{Składniki języka C++}
+
+    \begin{lstlisting}
+    auto x = 0;
+    do {
+        x = roll_dice();
+        std::cout << "you rolled " << x << "\n";
+    } while (x != 6);
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Control flow - iteration ({\tt for})}
+    \framesubtitle{Składniki języka C++}
+
+    \begin{lstlisting}
+    for (auto i = 10; i >= 0; --i) {
+        std::cout << i << '\n';
+    }
+    std::cout << "Happy New Year!\n";
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Control flow - procedural abstraction}
+    \framesubtitle{Składniki języka C++}
+
+    Funkcje spełniają rolę procedur w C++. Każda funkcja składa się z:
+
+    \begin{enumerate}
+        \item nazwy -- identyfikatora jakim można ją \emph{wywołać}
+        \item listy parametrów formalnych -- specyfikacji jakich
+            \emph{argumentów} (\emph{parametrów faktycznych}) wymaga od
+            wywołującego
+        \item typu zwracanego -- specyfikacji typu jakiego wartości funkcja
+            produkuje
+        \item ciała -- ograniczonego nawiasami klamrowymi zbioru instrukcji
+            określającego operacje jakich dana funkcja jest abstrakcją
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Control flow - procedural abstraction}
+    \framesubtitle{Składniki języka C++}
+
+    \begin{lstlisting}
+    auto add_one(int const x) -> int
+    {
+        return (x + 1);
+    }
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Control flow - recursion}
+    \framesubtitle{Składniki języka C++}
+
+    Rekurencja jest realizowana za pomocą funkcji.
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Control flow - recursion}
+    \framesubtitle{Składniki języka C++}
+
+    \begin{lstlisting}
+    /* Raises b to the power of n. */
+    auto exponentiate(int const b, int const n) -> int
+    {
+        if (n <= 0) {
+            return 1;
+        }
+        return (b * exponentiate(b, (n - 1)));
+    }
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Control flow - concurrency and parallelism}
+    \framesubtitle{Składniki języka C++}
+
+    Współbieżność w C++ jest realizowana za pomocą \emph{wątków}. Tym samym
+    mechanizmem jest realizowana \emph{równoległość} przetwarzania
+    (\emph{parallelism}).
+
+    \vspace{1em}
+
+    Współbieżność można też zaimplementować na własną rękę, ale wymaga to
+    znacznie większego nakładu pracy.
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Control flow - concurrency and parallelism ({\tt std::thread})}
+    \framesubtitle{Składniki języka C++}
+
+    {\footnotesize
+    \begin{lstlisting}
+    auto display_greeting(std::string const name) -> void
+    {
+        std::cout << ("Hello, " + name + "!\n");
+    }
+
+    auto t1 = std::thread{display_greeting, "Joe"};    // Armstrong
+    auto t2 = std::thread{display_greeting, "Bjarne"}; // Stroustrup
+
+    /*
+     * Threads must be joined into the parent thread, or
+     * the program will crash.
+     */
+    t1.join();  // joining thread is blocked until joined
+                // thread terminates
+    t2.join();
+    \end{lstlisting}}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Control flow - nondeterminism}
+    \framesubtitle{Składniki języka C++}
+
+    Niedeterminizm jest nieodłączną cechą równoległości -- nie mamy gwarancji w
+    jakiej kolejności będą względem siebie wykonywac sie operacje w
+    \emph{różnych} wątkach.
+
+    \vspace{1em}
+
+    Niedeterminizm wewnątrz wątku możemy uzyskać generując liczby losowe. W tym
+    celu można użyć {\tt std::ranom\_device} lub odczytać $n$ bajtów z pliku
+    {\tt /dev/urandom}.
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Control flow - nondeterminism ({\tt std::random\_device})}
+    \framesubtitle{Składniki języka C++}
+
+    {\footnotesize
+    \begin{lstlisting}
+    std::random_device rd;
+    std::uniform_int_distribution<int> d20 (1, 20);
+
+    constexpr auto CRITICAL_SUCCESS = 20;
+    constexpr auto CRITICAL_FAILURE = 1;
+
+    auto const x = d20(rd);
+
+    if (x == CRITICAL_SUCCESS) {
+        std::cout << "you kill the monster in a single blow!\n";
+    } else if (x == CRITICAL_FAILURE) {
+        std::cout << "you wound yourself with your own sword!\n";
+    } else {
+        std::cout << "roll for damage.\n";
+    }
+    \end{lstlisting}}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Control flow - exceptions}
+    \framesubtitle{Składniki języka C++}
+
+    Mechanizmem dedykowanym sygnalizacji i obsługi błędów w C++ są
+    \emph{wyjątki}. Wyjątek może być rzucony (zasygnalizowany) słowem kluczowym
+    {\tt throw}; obsługa wyjątków odbywa się w bloku {\tt try-catch}.
+
+    \vspace{1em}
+
+    C++ pozwala na użycie dowolnego typu jako wyjątku.
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Control flow - exceptions}
+    \framesubtitle{Składniki języka C++}
+
+    {\footnotesize
+    \begin{lstlisting}
+    auto search_your_feelings(std::string father) -> void
+    {
+        if (father == "Darth Vader") {
+            throw std::string{"NO!!! NO!!!"};
+        }
+    }
+
+    /* ... */
+
+    try {
+        luke.search_your_feelings(lord_vader);
+    } catch (std::string const& error) {
+        std::cerr << ("operation failed: " + error + '\n');
+    }
+    \end{lstlisting}}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Data structures - biblioteka standardowa}
+    \framesubtitle{Składniki języka C++}
+
+    Biblioteka standardowa (ang. \emph{standard library}) języka C++ zawiera
+    wiele struktur danych takich jak
+    {\tt std::vector} (sekwencja o zmiennej długości),
+    {\tt std::queue} (kolejka FIFO),
+    {\tt std::map} (struktura mapująca klucze na wartości),
+    {\tt std::string} (napis),
+    {\tt std::pair}, itd.
+
+    \vspace{1em}
+
+    Warto używać struktur (a także funkcji) z biblioteki standardowej żeby
+    oszczędzić sobie pracy.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Data structures - własne typy danych}
+    \framesubtitle{Składniki języka C++}
+
+    Programista C++ może definiować również własne typy danych: struktury i
+    klasy, oraz wyliczenia.
+
+    \vspace{1em}
+
+    Klasy ({\tt class}) różnią się od struktur ({\tt struct}) tylko i wyłącznie
+    tym, że ich pola są domyślnie publiczne.
+
+    \vspace{1em}
+
+    Wyliczenia słabe ({\tt enum}) są typu {\tt int}, ich wartości są globalne, i
+    mają automatycznie zdefiniowane operacje arytmetyczne (np. sumę bitową). Są
+    przydatne przy definiowaniu flag, które można łączyć.
+
+    Wyliczenia silne ({\tt enum class}) różnią sie od słabych tym, że są
+    ''swojego własnego'' typu, ich wartości nie są globalne, oraz nie mają
+    automatycznie zdefiniowanych operacji arytmetycznych. Są przydatne przy
+    definiowaniu rozdzielnych stanów.
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Data structures - struktury ({\tt struct})}
+    \framesubtitle{Składniki języka C++}
+
+    {\scriptsize
+    \begin{lstlisting}
+    struct being_with_legs {
+        std::string const name;
+        size_t const legs;
+
+        being_with_legs(std::string, size_t);
+    };
+
+    being_with_legs::being_with_legs(std::string n, size_t l)
+        : name{std::move(n)}
+        , legs{l}
+    {}
+
+    /* ... */
+
+    auto const snake = being_with_legs{ "snake", 0 };
+    auto const human = being_with_legs{ "human", 2 };
+    auto const spider = being_with_legs{ "spider", 8 };
+    \end{lstlisting}}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Data structures - wyliczenia ({\tt enum class})}
+    \framesubtitle{Składniki języka C++}
+
+    {\scriptsize
+    \begin{lstlisting}
+    enum class meal_kind {
+        BREAKFAST,
+        DINNER,
+        SUPPER,
+    };
+
+    auto is_most_important_meal_of_the_day(meal_kind const meal) -> bool
+    {
+        return (meal == meal_kind::BREAKFAST);
+    }
+    \end{lstlisting}}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Data structures - wyliczenia ({\tt enum})}
+    \framesubtitle{Składniki języka C++}
+
+    {\scriptsize
+    \begin{lstlisting}
+    enum some_flags_type {
+        SOME_FLAG_READ,
+        SOME_FLAG_WRITE,
+        SOME_FLAG_NONBLOCK,
+        SOME_FLAG_BUFFERED,
+        SOME_FLAG_UNBUFFERED,
+    };
+    constexpr auto SOME_FLAG_DEFAULT = SOME_FLAG_READ
+                                     | SOME_FLAG_WRITE
+                                     | SOME_FLAG_BUFFERED;
+
+    // We want read-only, non-blocking, unbuffered descriptor.
+    auto const mode = SOME_FLAG_READ
+                    | SOME_FLAG_NONBLOCK
+                    | SOME_FLAG_UNBUFFERED;
+    \end{lstlisting}}
+\end{frame}
+
+\begin{frame}
+    \frametitle{I/O}
+    \framesubtitle{Składniki języka C++}
+\end{frame}
 
 \end{document}
