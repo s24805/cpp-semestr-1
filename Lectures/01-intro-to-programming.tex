@@ -153,7 +153,11 @@ moredelim=**[is][\color{red}]{@}{@}}
 
 \begin{frame}
     \frametitle{Jackson Structured Programming}
-    \framesubtitle{Michael Jackson, 1975; Principles of Program Design}
+    \framesubtitle{Control flow}
+
+    Michael Jackson, 1975; Principles of Program Design
+
+    \vspace{1em}
 
     \begin{enumerate}
         \item \emph{sequence} -- sekwencjonowanie, czyli ustalenie kolejności
@@ -167,7 +171,70 @@ moredelim=**[is][\color{red}]{@}{@}}
     \vspace{1em}
 
     Nadaje się do opisu algorytmów, ale nie za bardzo do czegoś więcej. Często
-    tak jest z różnymi modelami.
+    tak jest z różnymi modelami -- są wygodne w teorii, ale niezbyt praktyczne.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Warnier/Orr}
+    \framesubtitle{Control flow}
+
+    Jean-Dominique Warnier, 1976; Logical construction of programs\\
+    Kenneth Orr, 1977; Structured systems development
+
+    \vspace{1em}
+
+    \begin{enumerate}
+        \item \emph{recursion} -- rekurencja, czyli sposób na zagnieżdżone
+            wykonywanie operacji
+        \item \emph{concurrency} -- współbieżność, czyli sposób na wykonywanie
+            kilku operacji ''w tym samym czasie'' (naprzemiennie na jednym
+            procesorze, lub równolegle\footnote{ten wariant nazywa się
+            \emph{parallelism}, i czasem jest podawany obok współbieżności jako
+            coś innego} na wielu)
+    \end{enumerate}
+
+    \vspace{1em}
+
+    Rekurencja i współbieżność są nieodłącznymi elementami programów, które
+    działają w ''prawdziwym świecie''. Bez nich niemożliwe byłoby interaktywne
+    używanie komputerów.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Michael Scott}
+    \framesubtitle{Control flow}
+
+    Michael Lee Scott, 2000; Programming language pragmatics\footnote{ISBN
+    1-55860-442-1}
+
+    \vspace{1em}
+
+    \begin{enumerate}
+        \item \emph{procedural abstraction} -- zbiór operacji opakowany w sposób
+            umożliwiający ich wspólne wywołanie, w skrócie: funkcja
+        \item \emph{nondeterminacy} -- niedeterminizm, czyli sposób na
+            zapewnienie losowości przy wyborze ściezki wykonania
+    \end{enumerate}
+
+    \vspace{1em}
+
+    Funkcje i niedeterminizm zamykają bazowe mechanizmy, które służą kontroli
+    przepływu.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Podsumowanie}
+    \framesubtitle{Control flow}
+
+    \begin{enumerate}
+        \item \emph{sequence}
+        \item \emph{selection}
+        \item \emph{iteration}
+        \item \emph{recursion}
+        \item \emph{concurrency}
+        \item \emph{procedural abstraction}
+        \item \emph{nondeterminism}
+    \end{enumerate}
 \end{frame}
 
 \begin{frame}
