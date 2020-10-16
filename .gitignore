@@ -2,6 +2,14 @@
 *.so
 *.bin
 
+*.aux
+*.log
+*.nav
+*.out
+*.snm
+*.toc
+*.pdf
+
 .*
 !.gitkeep
 !.gitignore
