@@ -12,6 +12,7 @@
 \usepackage{xcolor}
 \usepackage{geometry}
 \usepackage{listings}
+\usepackage{epigraph}
 
 \usetheme{-bjeldbak/beamerthemebjeldbak}
 
@@ -130,6 +131,7 @@ moredelim=**[is][\color{red}]{@}{@}}
             ISBN-13: 978-1-934356-59-3}: functional \emph{vs} object-oriented
             \emph{vs} structural \emph{vs} prototype-based \emph{vs} ...
         \item rodziny: C-like (pochodne po języku ALGOL), ML-like, Lisp-like
+        \item ''toy'' \emph{vs} ''real''
     \end{enumerate}
 
     \vspace{1em}
@@ -149,6 +151,18 @@ moredelim=**[is][\color{red}]{@}{@}}
     \frametitle{Co jest potrzebne w języku?}
 
     ?{\tiny \textsubscript{(pytanie do sali)}}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Z punktu widzenia prostego człowieka}
+
+    \begin{enumerate}
+        \item \emph{control flow} -- mechanizmy przepływu kontroli, czyli
+            sterowania programem
+        \item \emph{data structures} -- reprezentacja struktur danych
+        \item \emph{I/O} -- zapis i odczyt danych, czyli sposób na interakcję ze
+            światem zewnętrznym
+    \end{enumerate}
 \end{frame}
 
 \begin{frame}
@@ -238,14 +252,105 @@ moredelim=**[is][\color{red}]{@}{@}}
 \end{frame}
 
 \begin{frame}
-    \frametitle{Z punktu widzenia programisty}
+    \frametitle{Bit, nibble\footnote{połowa bajtu, czyli 4 bity}, byte, word,
+        half-word, double-word, quad-word...}
+    \framesubtitle{Data structures}
+
+    \epigraph{Na początku było słowo}{J 1,1-3}
+
+    Bit - czyli wartość mogąca przechowywać $0$ lub $1$.
+
+    Podstawową jednostką danych obsługiwanych przez CPU jest ''słowo'' -
+    sekwencja bitów o pojedynczego długości rejestru. Dla architektury x86-64
+    długość słowa to 64 bity.
+
+    Zapis i odczyt słowa w pamięci zazwyczaj są \emph{operacjami atomowymi} co
+    ma znaczenie dla programowania współbieżnego.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Liczby całkowite, ułamki, wartości logiczne}
+    \framesubtitle{Data structures}
+
+    Liczby całkowite - ze znakiem ({\tt signed}), bez znaku ({\tt unsigned}).\\
+    Liczby zmiennoprzecinkowe - pojedynczej precyzji, podwójnej precyzji.\\
+    Wartości logiczne - prawda, fałsz.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Znaki, napisy}
+    \framesubtitle{Data structures}
+
+    Znaki\footnote{kiedyś były najczęśniej szerokości 1 bajty (ASCII), ale
+    obecnie, od upowszechnienia się standardu Unicode, są zazwyczaj zmiennej
+    długości (UTF-8)} - reprezentujące pojedynczy glif (literę, znak
+    interpunkcyjny, itd.) lub symbol kontrolny.\\
+    Napisy - reprezentujące sekwencje znaków (np. {\tt ''Hello, World!''}).
+\end{frame}
+
+\begin{frame}
+    \frametitle{Lista, kolejka, stos, zbiór, drzewo, krotka...}
+    \framesubtitle{Data structures}
+
+    {\scriptsize
+    \begin{enumerate}
+        \item \emph{list} -- lista, czyli poszeregowana sekwencja wartości typu
+            $T$, do których daje dostęp w dowolnej kolejności (ang.
+            \emph{random~access})
+        \item \emph{queue} -- kolejka, czyli poszeregowana sekwencja wartości
+            typu $T$, do których daje dostęp na zasadzie \emph{FIFO}
+        \item \emph{stack} -- stos, czyli poszeregowana sekwencja wartości
+            typu $T$, do których daje dostęp na zasadzie \emph{LIFO}
+        \item \emph{set} -- zbiór, nieposzeregowana kolekcja wartości typu $T$
+        \item \emph{tree} -- drzewo, często wykorzystywane do budowania
+            ''map'' czyli struktur asocjacyjnych pozwalających na przechowanie
+            wartości typu $T$ pod kluczem typu $K$
+        \item \emph{tuple} -- krotka, czyli struktura danych zawierająca $n$ pól
+            typów $T_0$, $T_1$, ..., $T_n$
+    \end{enumerate}}
+
+    Podstawową złożoną strukturą danych jest \emph{tablica}, czyli sekwencja $n$
+    elementów typu $T$. Bazując na tablicach bajtów (czyli de facto surowych,
+    wydzielonych obszarach pamięci) można zaimplementować wszystkie powyższe
+    struktury danych.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Typy użytkownika}
+    \framesubtitle{Data structures}
+
+    \begin{labeling}{\emph{struct}}
+        \item[\emph{enum}] wyliczenie, czyli zdefiniowany zbiór wartości, które
+            dany typ może przechować (vide \emph{sum~type})
+        \item[\emph{struct}] struktura, czyli typ złożony z kilku pól różnych
+                typów -- może przechowywać wszystkie kombinacje wartości pól
+                (vide \emph{product~type})
+    \end{labeling}
+
+    Języki programowania często zapewniają programistom możliwość tworzenia
+    własnych typów danych.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Wskaźniki i dynamiczna alokacja pamięci}
+    \framesubtitle{Data structures}
+
+    Implementacja wielu struktur danych (np. list lub napisów o zmiennej
+    długości) byłaby niemożliwa bez wskaźników i dynamicznej alokacji pamięci.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Podsumowanie}
+    \framesubtitle{Data structures}
 
     \begin{enumerate}
-        \item \emph{control flow} -- mechanizmy przepływu kontroli, czyli
-            sterowania programem
-        \item \emph{data structures} -- reprezentacja struktur danych
-        \item \emph{I/O} -- zapis i odczyt danych, czyli sposób na interakcję ze
-            światem zewnętrznym
+        \item słowo (\emph{word}), bajt (\emph{byte}), bit
+        \item tablica (\emph{array})
+        \item typy użytkownika (\emph{user-defined type} -- \emph{enum},
+            \emph{struct})
+        \item wskaźnik (\emph{pointer})
+        \item dynamiczna alokacja pamięci (\emph{memory allocation})
+        \item typy proste \emph{vs} typy złożone
     \end{enumerate}
 \end{frame}
 
