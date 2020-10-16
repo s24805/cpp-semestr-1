@@ -25,7 +25,7 @@ BreakBeforeBinaryOperators: NonAssignment
 BreakBeforeBraces: Custom
 BraceWrapping:
     SplitEmptyFunction: false
-    AfterCaseLabel: true
+    # AfterCaseLabel: true
     AfterClass: false
     AfterControlStatement: false
     AfterEnum: false
