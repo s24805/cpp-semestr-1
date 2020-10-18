@@ -1,6 +1,7 @@
 all: \
 	00-sprawy-organizacyjne.pdf \
-	01-intro-to-programming.pdf
+	01-intro-to-programming.pdf \
+	02-first-steps.pdf
 
 %.pdf: %.tex
 	pdflatex -halt-on-error $^
