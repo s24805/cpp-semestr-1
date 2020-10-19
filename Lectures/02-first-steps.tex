@@ -18,8 +18,8 @@
 \usetheme{-bjeldbak/beamerthemebjeldbak}
 
 \definecolor{xbarcolor}{HTML}{000000}
-\setbeamercolor{lower separation line head}{bg=xbarcolor} 
-\setbeamercolor{lower separation line foot}{bg=xbarcolor} 
+\setbeamercolor{lower separation line head}{bg=xbarcolor}
+\setbeamercolor{lower separation line foot}{bg=xbarcolor}
 
 \title{Podstawy programownia (w języku C++)}
 \subtitle{Pierwsze kroki (płytka woda)}
@@ -489,7 +489,9 @@ moredelim=**[is][\color{olive}]{$}{$}}
     {\tt ./build/00-hello-world.bin}
     \vspace{1em}
 
-    Zadanie: zmienić kod tak, żeby wypisywał {\tt Hello,} a potem imię studenta.
+    Zadanie: zmienić kod tak, żeby wypisywał {\tt Hello,} a potem imię studenta
+    i zapisać w pliku {\tt src/s01-hello-me.cpp}.
+    \label{lecture_exercise_0}
 \end{frame}
 
 \section{Argumenty wiersza poleceń}
@@ -515,6 +517,7 @@ moredelim=**[is][\color{olive}]{$}{$}}
 
     Zadanie: sprawdzić się stanie jak nie poda się argumentu (tj., uruchomi
     program bez ''{\tt Kasia}''.).
+    \label{lecture_exercise_1}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -779,11 +782,13 @@ moredelim=**[is][\color{olive}]{$}{$}}
     \frametitle{Używanie tablic w stylu C}
     \framesubtitle{Tablica w stylu C}
 
-    Aby dostać się do elementu $n$ w tablicy używa się operatora {\tt []}
+    Aby użyć (do odczytu lub modyfikacji) elementu $n$ w tablicy używa się
+    operatora {\tt []}
 
     \begin{lstlisting}
     int array[] = { 42, 64, 127, -1 };
     auto x = array@[@0@]@;  `// x contains 42`
+    array@[@0@]@ = 8;  `// array[0] contains 8`
     \end{lstlisting}
 \end{frame}
 
@@ -797,6 +802,448 @@ moredelim=**[is][\color{olive}]{$}{$}}
 
     W C++ dostępne są lepsze zamienniki tablic: {\tt std::array} i {\tt
     std::vector}.
+\end{frame}
+
+\section{Argumenty wiersza poleceń (c.d.)}
+
+\begin{frame}[fragile]
+    \frametitle{Parametry formalne funkcji main}
+    \framesubtitle{Argumenty wiersza poleceń}
+
+    \vspace{1em}
+    \begin{lstlisting}
+    `auto main`(int argc, char* argv[]) `-> int`
+    \end{lstlisting}
+    \vspace{1em}
+
+    Kiedy wiadomo jakie jest znaczenie każdego z parametrów formalnych funkcji
+    {\tt main} oraz jak używa się wartości ich typów możemy kontynuować dyskusję
+    na temat ich używania.
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Konwersja na typ {\tt std::string}}
+    \framesubtitle{Argumenty wiersza poleceń}
+
+    Argumenty wiersza poleceń dostarczane są do programu w formie napisów w
+    stylu C. Zazwyczaj nie jest to forma w jakiej są potrzebne wewnątrz
+    programu.
+
+    Aby dokonać konwersji z napisu w stylu C na {\tt std::string} (''napis w
+    stylu C++'') możemy użyć następującego zapisu:
+
+    \begin{lstlisting}
+    `auto main(int argc, char* argv[]) -> int`
+    `{`
+        auto const name = @std::string{argv[1]}@;
+        `std::cout << "Hello, " + name + "!\n";`
+        `return 0;`
+    `}`
+    \end{lstlisting}
+
+    Użycie typu {\tt std::string} wymaga dołączenia nagłówka {\tt string}:
+    \begin{lstlisting}
+    #include <string>
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Konwersja na typy liczbowe}
+    \framesubtitle{Argumenty wiersza poleceń}
+
+    Aby dokonać konwersji z napisu (w stylu C, lub {\tt std::string}) na typ
+    liczbowy można użyć następujących funkcji z biblioteki standardowej:
+
+    \vspace{1em}
+    {\footnotesize
+    \begin{lstlisting}
+    std::stoi(argv[n]);  `// convert to an integer`
+    std::stof(argv[n]);  `// convert to a floating point value`
+    \end{lstlisting}}
+    \vspace{1em}
+
+    Funkcja {\tt
+    std::stoi}\footnote{\url{https://en.cppreference.com/w/cpp/string/basic_string/stol}}
+    dokonuje konwersji na typ {\tt int}, a funkcja {\tt
+    std::stof}\footnote{\url{https://en.cppreference.com/w/cpp/string/basic_string/stof}}
+    na typ {\tt float}.
+    Użycie którejkolwiek z tych funkcji wymaga dołączenia nagłówka {\tt string}.
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Konwersja na typy liczbowe}
+    \framesubtitle{Argumenty wiersza poleceń}
+
+    Wykorzystując wiedzę z poprzedniego slajdu można napisać program, który
+    będzie dodawać za użytkownika:
+
+    {\scriptsize
+    \begin{lstlisting}
+    #include <iostream>  `// for std::cout, std::cerr, and std::cin`
+    #include <string>
+
+    auto main(int argc, char* argv[]) -> int
+    {
+        auto const a = std::stoi(argv[1]);
+        auto const b = std::stoi(argv[2]);
+        std::cout << (a + b) << "\n";
+        return 0;
+    }
+    \end{lstlisting}}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Zadania}
+    \framesubtitle{Argumenty wiersza poleceń}
+
+    Zadania:
+    \label{lecture_exercise_2}
+
+    \begin{enumerate}
+    \item zapisać program z poprzedniego slajdu w repozytorium w pliku {\tt
+        src/s01-add.cpp}
+    \item napisać i zapisać w repozytorium podobne programy dla odejmowania
+        ({\tt s01-sub.cpp}), mnożenia ({\tt s01-mul.cpp}), i dzielenia ({\tt
+        s01-div.cpp}).
+    \item sprawdzić co się stanie przy podaniu \emph{naprawdę dużych} liczb (np.
+        12345678901234567890)
+    \end{enumerate}
+
+    Kompilacja i uruchomienie:
+    {\footnotesize
+    \begin{lstlisting}
+    make build/s01-add.bin   `# how to compile`
+    ./build/s01-add.bin 2 2  `# how to run`
+    \end{lstlisting}}
+\end{frame}
+
+\section{Pobieranie danych od użytkownika}
+
+\begin{frame}
+    \frametitle{Pobieranie danych od użytkownika}
+
+    Nie zawsze możliwe jest wymaganie aby wszystkie dane podać na wierszu
+    poleceń. Często nie jest to też najwygodniejsze rozwiązanie.
+
+    Jeśli potrzeba jest pobrania od użytkownika danych w trakcie działania
+    programu, można do tego wykorzystać standardowy strumień wejścia -- {\tt
+    std::cin} (dostępny po dołączeniu nagłówka {\tt iostream}).
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Odczyt danych}
+    \framesubtitle{Pobieranie danych od użytkownika}
+
+    Korzystając z wiedzy z poprzedniego wykładu wiemy jak odczytać dane ze
+    standardowego strumienia wejścia -- za pomocą funkcji {\tt std::getline}
+    (dostępnej po dołączeniu nagłówka {\tt iostream}):
+
+    \begin{lstlisting}
+    auto line = std::string{};
+    std::getline(std::cin, line);
+    \end{lstlisting}
+
+    Jak wyglądałoby to w pełnym programie?
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Funkcja {\tt std::getline}}
+    \framesubtitle{Pobieranie danych od użytkownika}
+
+    {\footnotesize
+    \begin{lstlisting}
+    #include <iostream>
+    #include <string>
+
+    auto main() -> int
+    {
+        auto name = std::string{};
+        std::getline(std::cin, name);
+
+        std::cout << "Hello, " << name << "!\n";
+
+        return 0;
+    }
+    \end{lstlisting}}
+
+    Zadanie: zapisać ten program w repozytorium w pliku {\tt
+    src/s01-hello-name.cpp}, skompilować, i uruchomić.
+    \label{lecture_exercise_3}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Funkcja {\tt std::getline} (c.d.)}
+    \framesubtitle{Pobieranie danych od użytkownika}
+
+    Odczytywanie danych w ten sposób może być niewygodne. Weźmy na tapet
+    przykład programu dodającego:
+
+    {\tiny
+    \begin{lstlisting}
+    #include <iostream>
+    #include <string>
+
+    auto main() -> int
+    {
+        auto tmp = std::string{};  `// temporary variable`
+
+        std::getline(std::cin, tmp);
+        auto const a = std::stoi(tmp);
+
+        std::getline(std::cin, tmp);
+        auto const b = std::stoi(tmp);
+
+        std::cout << (a + b) << "\n";
+
+        return 0;
+    }
+    \end{lstlisting}}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Funkcja {\tt std::getline} (c.d.)}
+    \framesubtitle{Pobieranie danych od użytkownika}
+
+    Będzie jeszcze gorzej jeśli będziemy chcieli wyświetlić użytkownikowi
+    wskazówkę dotyczącą tego co powinien wpisać:
+
+    {\tiny
+    \begin{lstlisting}
+    #include <iostream>
+    #include <string>
+
+    auto main() -> int
+    {
+        auto tmp = std::string{};  `// temporary variable`
+
+        std::getline(std::cin, tmp);
+        std::cout << "a = ";
+        auto const a = std::stoi(tmp);
+
+        std::cout << "b = ";
+        std::getline(std::cin, tmp);
+        auto const b = std::stoi(tmp);
+
+        std::cout << (a + b) << "\n";
+
+        return 0;
+    }
+    \end{lstlisting}}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Procedural abstraction to the rescue}
+    \framesubtitle{Pobieranie danych od użytkownika}
+
+    Możemy uprościć sobie życie, zmniejszyć liczbę powtórzonych linii kodu, oraz
+    usunąć zbędne zmienne tymczasowe ({\tt tmp} z poprzednich slajdów). Jak to
+    zrobić?
+
+    Wykorzystując poznany na poprzednim wykładzie mechanizm \emph{procedural
+    abstraction} i definiując własną funkcję.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Własne funkcje - po co?}
+    \framesubtitle{Pobieranie danych od użytkownika}
+
+    Wewnątrz funkcji można zawrzeć fragment logiki, który w naszym kodzie
+    powtarza się $n$ razy. Nie ma po co pisać tego samego kodu więcej razy niż
+    ma to sens i jest potrzebne.
+
+    Zdefiniujmy więc funkcję, która:
+    \begin{enumerate}
+        \item wyświetli użytkownikowi wskazówkę dotyczącą tego jakie dane powinien wpisać
+        \item poczeka aż te dane użytkownik wpisze
+        \item dokona ich konwersji na liczbę całkowitą i zwróci tą liczbę do
+            funkcji wywołującej
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Definicja własnej funkcji -- nazwa}
+    \framesubtitle{Pobieranie danych od użytkownika}
+
+    Jak powinna nazywać się funkcja, którą zdefiniujemy?
+
+    Najlepiej jeśli jej nazwa będzie odzwierciedlać jej zastosowanie. Skoro
+    funkcja ma pobrać od użytkownika liczbę całkowitą nazwijmy ją {\tt
+    ask\_user\_for\_integer}.
+
+    \begin{lstlisting}
+    auto ask_user_for_integer
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Definicja własnej funkcji -- lista parametrów formalnych}
+    \framesubtitle{Pobieranie danych od użytkownika}
+
+    Jakie parametry formalne powinna posiadać funkcja, którą zdefiniujemy?
+
+    Skoro ma popowiedzieć użytkownikowi co powinien wpisać dobrze byłoby żeby
+    wyświetliła mu jakiś tekst na ekranie. Tekst, czyli napis, czyli {\tt
+    std::string}. Niech nasza funkcja przyjmuje więc {\tt std::string} jako swój
+    parametr formalny.
+
+    \begin{lstlisting}
+    `auto ask_user_for_integer`(std::string prompt)
+    \end{lstlisting}
+
+    Dlaczego parametr nazywa się {\tt prompt}? Jest to słowo określające
+    wszelkie ''znaki zachęty'' dla użytkownika.
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Definicja własnej funkcji -- typ zwracany}
+    \framesubtitle{Pobieranie danych od użytkownika}
+
+    Jaki typ powinna zwracać funkcja, którą zdefiniujemy?
+
+    Skoro chcemy uzyskać liczbę całkowitą to dobrze byłoby żeby nasza funkcja
+    takie liczby produkowała. Ustalmy więc typ zwracany na {\tt int}.
+
+    \begin{lstlisting}
+    `auto ask_user_for_integer(std::string prompt)` -> int
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Definicja własnej funkcji -- ciało}
+    \framesubtitle{Pobieranie danych od użytkownika}
+
+    Nasza funkcja powinna wyświetlić użytkownikowi wskazówkę dotyczącą tego co
+    ma wpisać. Wyświetlmy więc taką wskazówkę na ekranie:
+
+    {\scriptsize
+    \begin{lstlisting}
+    `auto ask_user_for_integer(std::string prompt) -> int`
+    `{`
+        std::cout << prompt;
+    `}`
+    \end{lstlisting}}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Definicja własnej funkcji -- ciało}
+    \framesubtitle{Pobieranie danych od użytkownika}
+
+    Możemy dodatkowo podpowiedzieć, że chodzi o liczbę całkwitą.
+    Niech funkcja robi to automatycznie, żeby nie trzeba było za każdym razem
+    umieszczać tej informacji we wskazówce:
+
+    {\scriptsize
+    \begin{lstlisting}
+    `auto ask_user_for_integer(std::string prompt) -> int`
+    `{`
+        `std::cout << prompt` << " int:"`;`
+    `}`
+    \end{lstlisting}}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Definicja własnej funkcji -- ciało}
+    \framesubtitle{Pobieranie danych od użytkownika}
+
+    Skoro użytkownik został poinformowany czego od niego chcemy, możnemy
+    spróbować pobrać od niego dane...
+
+    {\scriptsize
+    \begin{lstlisting}
+    `auto ask_user_for_integer(std::string prompt) -> int`
+    `{`
+        `std::cout << prompt << " int:";`
+        auto n = std::string{};
+        std::getline(std::cin, n);
+    `}`
+    \end{lstlisting}}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Definicja własnej funkcji -- ciało}
+    \framesubtitle{Pobieranie danych od użytkownika}
+
+    ...i zwrócić je, przekonwertowane na liczbę całkowitą:
+
+    {\scriptsize
+    \begin{lstlisting}
+    `auto ask_user_for_integer(std::string prompt) -> int`
+    `{`
+        `std::cout << prompt << " int:";`
+        `auto n = std::string{};`
+        `std::getline(std::cin, n);`
+        return std::stoi(n);
+    `}`
+    \end{lstlisting}}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Wykorzystanie funkcji}
+    \framesubtitle{Pobieranie danych od użytkownika}
+
+    {\scriptsize
+    \begin{lstlisting}
+    auto main() -> int
+    {
+        auto const a = ask_user_for_integer("a = ");
+        auto const b = ask_user_for_integer("b = ");
+        std::cout << (a + b) << "\n";
+        return 0;
+    }
+    \end{lstlisting}}
+
+    Zadanie: napisać nowe programy dodający, odejmujący, itd. z wykorzystaniem
+    funkcji {\tt ask\_user\_for\_integer} i zapisać je w plikach {\tt
+    src/s01-X-stdin.cpp} (gdzie $X$ to odpowiednio {\tt add} dla dodawania, {\tt
+    sub} dla odejmowania, itd. - jak w poprzednim zadaniu).
+    \label{lecture_exercise_4}
+\end{frame}
+
+\section{Podsumowanie}
+
+\begin{frame}
+    \frametitle{Co nowego?}
+    \frametitle{Podsumowanie}
+
+    Student powinien umieć:
+
+    \begin{enumerate}
+        \item pobrać argumenty podane do programu na wierszu poleceń
+        \item powiedzieć czym jest wskaźnik i tablica w stylu C
+        \item pobrać dane ze standardowego strumienia wejścia ({\tt std::cin})
+        \item zdefiniować własną funkcję
+        \item przeanalizować proste wymagania dotyczące funkcjonalności funkcji
+            i określić jak powinna wyglądać jej nazwa, parametry formalne i typ
+            zwracany
+        \item zapisać kod w repozytorium, skompilować go, i uruchomić wynikowy
+            program
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Zadania}
+    \framesubtitle{Podsumowanie}
+
+    Zadania znajdują się na slajdach
+    \ref{lecture_exercise_0},
+    \ref{lecture_exercise_1},
+    \ref{lecture_exercise_2},
+    \ref{lecture_exercise_3},
+    \ref{lecture_exercise_4}.
+
+    Pliki jakie powinny pojawić się w repozytorium:
+    \begin{enumerate}
+        \item {\tt src/s01-hello-me.cpp}
+        \item {\tt src/s01-add.cpp}
+        \item {\tt src/s01-sub.cpp}
+        \item {\tt src/s01-mul.cpp}
+        \item {\tt src/s01-div.cpp}
+        \item {\tt src/s01-hello-name.cpp}
+        \item {\tt src/s01-add-stdin.cpp}
+        \item {\tt src/s01-sub-stdin.cpp}
+        \item {\tt src/s01-mul-stdin.cpp}
+        \item {\tt src/s01-div-stdin.cpp}
+    \end{enumerate}
 \end{frame}
 
 \end{document}
