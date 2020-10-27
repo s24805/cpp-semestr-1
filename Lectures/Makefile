@@ -1,7 +1,9 @@
 all: \
 	00-sprawy-organizacyjne.pdf \
 	01-intro-to-programming.pdf \
-	02-first-steps.pdf
+	02-first-steps.pdf \
+	03-loops-and-data-structures.pdf \
+	04-threads-and-io.pdf
 
 %.pdf: %.tex
 	pdflatex -halt-on-error $^
