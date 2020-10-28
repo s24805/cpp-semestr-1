@@ -629,16 +629,20 @@ moredelim=**[is][\color{olive}]{$}{$}}
     Używając pętli \emph{range-based} {\tt for} oraz biblioteki standardowej
     można szybko napisać własny kalkulator obliczający wyrażenia zapisane w
     \emph{odwrotnej notacji
-    polskiej}\footnote{\url{https://en.wikipedia.org/wiki/Reverse_Polish_notation}}.
+    polskiej}\footnote{\url{https://en.wikipedia.org/wiki/Reverse_Polish_notation}}:
 
-    \vspace{1em}
+    \begin{lstlisting}
+    make build/04-rpn-calculator.bin
+    ./build/04-rpn-calculator.bin 2 2 + p
+    4
+    \end{lstlisting}
 
-    {\small
+    {\tiny
     Kod źródłowy kalkulatora znajduje się w repozytorium z szablonem zajęć:
     \url{https://git.sr.ht/~maelkum/education-introduction-to-programming-cxx/tree/master/src/04-rpn-calculator.cpp}}
 \end{frame}
 
-\begin{frame}[fragile]
+\begin{frame}
     \frametitle{Kalkulator -- odwrotna notacja polska}
     \framesubtitle{Pętla \emph{range-based} {\tt for}}
 
@@ -652,7 +656,7 @@ moredelim=**[is][\color{olive}]{$}{$}}
     2}
 \end{frame}
 
-\begin{frame}[fragile]
+\begin{frame}
     \frametitle{Zadanie}
     \framesubtitle{Pętla \emph{range-based} {\tt for}}
     \label{lecture_exercise_5}
@@ -666,7 +670,10 @@ moredelim=**[is][\color{olive}]{$}{$}}
         \item dzielenia liczb całkowitych, operatorem {\tt //} (czyli `{\tt 5 2
             //}' da 2, a nie 2.5)
         \item reszty z dzielenia, operatorem {\tt \%}
-        \item potęgowania, operatorem {\tt **}
+        \item potęgowania, operatorem {\tt **}\footnote{operatory zawierające
+            znak * trzeba na wierszu poleceń ''otoczyć'' znakiem apostrofu żeby
+            powłoka nie potraktowała ich jako znaków specjalnych, np. {\tt 2 2
+            '*'}}
         \item pierwiastka kwadratowego, operatorem {\tt sqrt}
         \item jednej operacji wymyślonej przez siebie
     \end{enumerate}}
@@ -701,7 +708,8 @@ moredelim=**[is][\color{olive}]{$}{$}}
     \ref{lecture_exercise_1},
     \ref{lecture_exercise_2},
     \ref{lecture_exercise_3},
-    \ref{lecture_exercise_4}.
+    \ref{lecture_exercise_4},
+    \ref{lecture_exercise_5}.
 \end{frame}
 
 \end{document}
