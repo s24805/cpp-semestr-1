@@ -22,7 +22,7 @@ auto pop_top(std::stack<double>& stack) -> double
 }
 
 
-auto op_addition(std::stack<double>& stack) -> void
+auto evaluate_addition(std::stack<double>& stack) -> void
 {
     if (stack.size() < 2) {
         throw std::logic_error{"not enough operands for +"};
@@ -32,7 +32,7 @@ auto op_addition(std::stack<double>& stack) -> void
     stack.push(a + b);
 }
 
-auto op_subtraction(std::stack<double>& stack) -> void
+auto evaluate_subtraction(std::stack<double>& stack) -> void
 {
     if (stack.size() < 2) {
         throw std::logic_error{"not enough operands for -"};
@@ -60,9 +60,9 @@ auto main(int argc, char* argv[]) -> int
             if (each == "p") {
                 std::cout << pop_top(stack) << "\n";
             } else if (each == "+") {
-                op_addition(stack);
+                evaluate_addition(stack);
             } else if (each == "-") {
-                op_subtraction(stack);
+                evaluate_subtraction(stack);
             } else {
                 stack.push(std::stod(each));
             }
