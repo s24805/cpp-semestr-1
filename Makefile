@@ -22,8 +22,8 @@ all:\
 	build/03-loops-intro.bin
 
 format:
-	@find ./src -name '*.cpp' | xargs -n 1 --no-run-if-empty --verbose clang-format -i
-	@find ./include -name '*.h' 2>/dev/null | xargs -n 1 --no-run-if-empty --verbose clang-format -i
+	@find . -name '*.cpp' | xargs -n 1 --no-run-if-empty --verbose clang-format -i
+	@find . -name '*.h' 2>/dev/null | xargs -n 1 --no-run-if-empty --verbose clang-format -i
 
 clean:
 	@find ./build -name '*.o' | xargs -n 1 --no-run-if-empty rm -v

@@ -445,9 +445,231 @@ moredelim=**[is][\color{olive}]{$}{$}}
 
 \section{range-based {\tt for}}
 
-\begin{frame}
+\begin{frame}[fragile]
     \frametitle{Po co?}
     \framesubtitle{Pętla \emph{range-based} {\tt for}}
+
+    Pętla \emph{range-based} {\tt for} sprawdza się kiedy instrukcja przez nią
+    wykonywana powinna być powtórzona dla \emph{każdego elementu} pewnej
+    wartości.
+
+    \begin{lstlisting}
+    for (auto const& each : employees) {
+        pay_salary(each);
+    }
+    \end{lstlisting}
+
+    Kompilator języka C++ automatycznie wygeneruje kod, który będzie
+    odpowiedzialny za sprawdzenie warunku końca iteracji.
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Element}
+    \framesubtitle{Pętla \emph{range-based} {\tt for}}
+
+    Zmienna (lub stała), która reprezentuje aktualny element definiowana jest
+    \emph{wewnątrz} pętli, wewnątrz nawiasów po słowie kluczowym {\tt for}:
+
+    \begin{lstlisting}
+    for (@auto const& each@ : employees) `{
+        pay_salary(each);
+    }`
+    \end{lstlisting}
+
+    {\footnotesize
+    Jeśli pętla ma za zadanie zmodyfikować elementy trzeba użyć zapisu {\tt
+    $T$\&}
+    czyli \emph{referencja~do~$T$}\footnote{referencja to taki wskaźnik, który
+    udaje, że nie jest wskaźnikiem i poprawia komfort życia programisty}.
+
+    Jeśli modyfikowacja elementów jest niepożądana, warto użyć zapisu
+    {\tt $T$ const}, czyli \emph{stała~typu~$T$}. Kompilator nie pozwoli na
+    modyfikację takich wartości.
+
+    Jeśli tworzenie kopii elementów jest kosztowne, a ich modyfikacje
+    niepożądane można połączyć te dwa zapisy w {\tt$T$ const\&}, czyli
+    \emph{referencja~do~stałej~typu~$T$}.
+    }
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Zakres}
+    \framesubtitle{Pętla \emph{range-based} {\tt for}}
+
+    Zakres iteracji jest określony przez pewną wartość, podaną po dwukropku:
+
+    \begin{lstlisting}
+    for (auto const& each : @employees@) `{
+        pay_salary(each);
+    }`
+    \end{lstlisting}
+
+    Wartość ta może być zmienną, stałą, a nawet być wynikiem wywołania funkcji.
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Instrukcja}
+    \framesubtitle{Pętla \emph{range-based} {\tt for}}
+
+    Instrukcja podawana jest w nawiasach klamrowych i wykorzystuje element:
+
+    \begin{lstlisting}
+    `for (auto const& each : employees)` {
+        pay_salary(each);
+    }
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Krok po kroku}
+    \framesubtitle{Pętla \emph{range-based} {\tt for}}
+
+    \begin{lstlisting}
+    for
+    \end{lstlisting}
+    \vspace{2.4em}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Krok po kroku}
+    \framesubtitle{Pętla \emph{range-based} {\tt for}}
+
+    \begin{lstlisting}
+    `for` (auto const& each_element : )
+    \end{lstlisting}
+    \vspace{2.4em}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Krok po kroku}
+    \framesubtitle{Pętla \emph{range-based} {\tt for}}
+
+    \begin{lstlisting}
+    `for` (`auto const& each_element` : some_value)
+    \end{lstlisting}
+    \vspace{2.4em}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Krok po kroku}
+    \framesubtitle{Pętla \emph{range-based} {\tt for}}
+
+    \begin{lstlisting}
+    `for (auto const& each_element : some_value)` {
+        use_element_to_do_stuff(each_element);
+    }
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Najprostszy przykład z możliwych}
+    \framesubtitle{Pętla \emph{range-based} {\tt for}}
+
+    {\footnotesize
+    \begin{lstlisting}
+    #include <algorithm>
+    #include <iostream>
+    #include <iterator>
+    #include <string>
+    #include <vector>
+
+    auto main(int argc, char* argv[]) -> int
+    {
+        auto args = std::vector<std::string>{};
+        std::copy_n(argv, argc, std::back_inserter(args));
+
+        for (auto const& each : args) {
+            std::cout << each << "\n";
+        }
+
+        return 0;
+    }
+    \end{lstlisting}}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Najprostszy przykład z możliwych}
+    \framesubtitle{Pętla \emph{range-based} {\tt for}}
+
+    Ten fragment tworzy
+    \emph{wektor}\footnote{\url{https://en.cppreference.com/w/cpp/container/vector}}
+    z tablicy argumentów, przekazanych funkcji {\tt main()} na wierszu poleceń.
+
+    {\footnotesize
+    \begin{lstlisting}
+    auto args = std::vector<std::string>{};
+    std::copy_n(argv, argc, std::back_inserter(args));
+    \end{lstlisting}}
+
+    Funkcja {\tt std::copy\_n} (kopiująca {\tt argc} elementów z tablicy {\tt
+    argv}) pochodzi z nagłówka {\tt algorithm}, a funkcja {\tt
+    std::back\_inserter} (dodająca elementy do {\tt args}) z nagłówka
+    {\tt iterator}.
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Najprostszy przykład z możliwych}
+    \framesubtitle{Pętla \emph{range-based} {\tt for}}
+
+    Następnie argumenty zebrane w zmiennej {\tt args} wypisywane są po kolei na
+    standardowy strumień wyjścia.
+
+    {\footnotesize
+    \begin{lstlisting}
+    for (auto const& each : args) {
+        std::cout << each << "\n";
+    }
+    \end{lstlisting}}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Kalkulator}
+    \framesubtitle{Pętla \emph{range-based} {\tt for}}
+
+    Używając pętli \emph{range-based} {\tt for} oraz biblioteki standardowej
+    można szybko napisać własny kalkulator obliczający wyrażenia zapisane w
+    \emph{odwrotnej notacji
+    polskiej}\footnote{\url{https://en.wikipedia.org/wiki/Reverse_Polish_notation}}.
+
+    \vspace{1em}
+
+    {\small
+    Kod źródłowy kalkulatora znajduje się w repozytorium z szablonem zajęć:
+    \url{https://git.sr.ht/~maelkum/education-introduction-to-programming-cxx/tree/master/src/04-rpn-calculator.cpp}}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Kalkulator -- odwrotna notacja polska}
+    \framesubtitle{Pętla \emph{range-based} {\tt for}}
+
+    Odwrotna notacja polska jest notacją \emph{postfiksową} (ang.
+    \emph{postfix}), czyli \emph{operator} występuje po \emph{operandach}:
+    {\tt 2 2 +}\\
+    Typowa, znana ze szkolnej matematyki, notacja z operatorem pomiędzy
+    operandami to notacja infiksowa (ang. \emph{infix}): {\tt 2 + 2}\\
+    Wywołania funkcji są zapisywane w notacji polskiej, prefiksowej (ang.
+    \emph{prefix}) - czyli z operatorem zapisywanym przed operandami: {\tt + 2
+    2}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Zadanie}
+    \framesubtitle{Pętla \emph{range-based} {\tt for}}
+    \label{lecture_exercise_5}
+
+    Rozwinąć kalkulator z poprzednich slajdów o funkcje:
+
+    {\footnotesize
+    \begin{enumerate}
+        \item mnożenia, operatorem {\tt *}
+        \item dzielenia, operatorem {\tt /}
+        \item dzielenia liczb całkowitych, operatorem {\tt //} (czyli `{\tt 5 2
+            //}' da 2, a nie 2.5)
+        \item reszty z dzielenia, operatorem {\tt \%}
+        \item potęgowania, operatorem {\tt **}
+        \item pierwiastka kwadratowego, operatorem {\tt sqrt}
+        \item jednej operacji wymyślonej przez siebie
+    \end{enumerate}}
 \end{frame}
 
 \section{Podsumowanie}
