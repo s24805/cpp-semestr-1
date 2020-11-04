@@ -1,0 +1,74 @@
+\documentclass[aspectratio=169]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage{textcomp}
+\usepackage[polish]{babel}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage{scrextend}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{geometry}
+\usepackage{listings}
+\usepackage{epigraph}
+
+\renewcommand{\epigraphsize}{\scriptsize}
+
+\usetheme{-bjeldbak/beamerthemebjeldbak}
+
+\definecolor{xbarcolor}{HTML}{000000}
+\setbeamercolor{lower separation line head}{bg=xbarcolor}
+\setbeamercolor{lower separation line foot}{bg=xbarcolor}
+
+\title{Podstawy programownia (w języku C++)}
+\subtitle{Struktury danych}
+\author{Marek Marecki}
+\institute{Polsko-Japońska Akademia Technik Komputerowych}
+
+\lstset{basicstyle=\ttfamily\color{black},
+columns=fixed,
+escapeinside={[*}{*]},
+inputencoding=utf8,
+extendedchars=true,
+moredelim=**[is][\color{red}]{@}{@},
+moredelim=**[is][\color{gray}]{`}{`},
+moredelim=**[is][\color{olive}]{$}{$}}
+
+\begin{document}
+
+{%
+    \setbeamertemplate{headline}{}
+    \frame{\titlepage}
+}
+\section{Podsumowanie}
+
+\begin{frame}
+    \frametitle{Co nowego?}
+    \frametitle{Podsumowanie}
+
+    Student powinien umieć:
+
+    \begin{enumerate}
+        \item samodzielnie zaprojektować własny typ danych, jego pola i funkcje
+            składowe
+        \item wytłumaczyć czym jest i jak działa funkcja składowa, oraz czym
+            jest {\tt this}
+        \item powiedzieć jaka jest rola konstruktora i destruktura
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Zadania}
+    \framesubtitle{Podsumowanie}
+
+    Zadania znajdują się na slajdach
+    \ref{lecture_exercise_0},
+    \ref{lecture_exercise_1},
+    \ref{lecture_exercise_2},
+    \ref{lecture_exercise_3},
+    \ref{lecture_exercise_4},
+    \ref{lecture_exercise_5}.
+\end{frame}
+
+\end{document}
