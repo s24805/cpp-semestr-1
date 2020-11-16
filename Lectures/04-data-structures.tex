@@ -591,7 +591,120 @@ moredelim=**[is][\color{olive}]{$}{$}}
 %% zewnętrzne
 %% składowe
 
-% \section{Dziedziczenie i polimorfizm}
+\section{OOP}
+
+\begin{frame}
+    \frametitle{OOP}
+
+    OOP -- programowanie zorientowane obiektowo (ang. \emph{object-oriented
+    programming}).
+
+    \vspace{1em}
+
+    Na początku lat 70. XX wieku powstał język
+    Smalltalk\footnote{\url{https://en.wikipedia.org/wiki/Smalltalk}}. Jego
+    głównym zamysłem była swobodna \emph{wymiana wiadomości} między
+    \emph{obiektami} (dlatego ''zorientowane obiektowo'') współistniejącymi w
+    systemie.
+
+    W późnych latach 80. XX wieku powstał język
+    Erlang\footnote{\url{https://en.wikipedia.org/wiki/Erlang_(programming_language)}},
+    którego jednym z głównych mechanizmów była \emph{asynchroniczna} wymiana
+    wiadomości.
+\end{frame}
+
+\begin{frame}
+    \frametitle{OOP (c.d.)}
+
+    Na początku lat 60. XX wieku został opracowany język
+    Simula\footnote{\url{https://en.wikipedia.org/wiki/Simula}}, który z językiem
+    Smalltalk nie miał zbyt wiele wspólnego, ale za to posiadał klasy i
+    dziedziczenie.
+
+    \vspace{1em}
+
+    W 1985 powstał język C++\footnote{\url{https://en.wikipedia.org/wiki/C++}},
+    który zmiksował składnię i funkcjonalność języka C z mechanizmami języka
+    Simula (klasy i dziedziczenie).
+\end{frame}
+
+\begin{frame}
+    \frametitle{OOP (c.d.)}
+
+    W 1995 powstał język
+    Java\footnote{\url{https://en.wikipedia.org/wiki/Java_(programming_language)}},
+    który wzorował się na Simuli i C++ - też miał klasy i dziedziczenie.
+    W Java wszystkie klasy mają wspólną klasę bazową - nazwaną, pechowo, {\tt
+    Object}. Nie jest to jedyna pechowa decyzja w tym języku...
+
+    \vspace{1em}
+
+    Dział marketingu Oracle uznał, że to oznacza, że język jest zorientowany
+    obiektowo i od tamtego momentu OOP zmieniło się nie do poznania\footnote{na
+    zajęciach OOP będzie oznaczać tą drugą, zdegenerowaną formę, a nie
+    oryginalną ideę}.\\Zamiast oznaczać swobodną, asynchroniczną wymianę
+    wiadomości zaczęło oznaczać programowanie oparte na klasach i wzorce
+    projektowe usiłujące zamaskować biedę semantyczną języka Java.
+\end{frame}
+
+\subsection{...w C++}
+
+\begin{frame}
+    \frametitle{Dziedziczenie -- po co?}
+    \framesubtitle{OOP}
+
+    Dziedziczenie (ang. \emph{inheritance}) polega na zbudowaniu jednego typu
+    (\emph{pochodnego}; ang.  \emph{derviced type}), w oparciu o drugi typ
+    (\emph{bazowy}; ang. \emph{base type}). Mówimy, że typ pochodny
+    \emph{dziedziczy po} typie bazowym.
+
+    \vspace{1em}
+
+    Typ pochodny posiada ''z automatu'' wszystkie pola i funkcje składowe typu
+    bazowego, ale dostęp ma tylko publicznych\footnote{Tak naprawdę ma jeszcze
+    dostęp do pól chronionych (słowo kluczowe {\tt protected}), ale pola
+    chronione to coś czego nie polecam używać. Dziedziczenie implementacji jest
+    brudnym mechanizmem nawet bez dodatkowych komplikacji.}, czyli typ pochodzny
+    \emph{dziedziczy implementację}\footnote{To czy odziedziczone pola są
+    widoczne ''na zewnątrz'' typu pochodnego zależy od tego czy dziedziczył
+    prywatnie (wtedy nie są) czy publicznie (wtedy są).} typu bazowego.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Polimorfizm -- po co?}
+    \framesubtitle{OOP}
+
+    Polimorfizm (ang. \emph{polymorphism}) polega na wykorzystaniu wspólnego
+    interfejsu dla wielu typów. Typy prezentujące ten interfejs mogą być używane
+    zamiennie.
+
+    \vspace{1em}
+
+    W C++ żeby móc wykorzystać polimorfizm potrzebe są wskaźniki lub referencje
+    (na etapie działania programu, ang. \emph{run time}), lub szablony (na
+    etapie kompilacji, ang. \emph{compile time}).
+\end{frame}
+
+\begin{frame}
+    \frametitle{Po co? (moim zdaniem)}
+    \framesubtitle{OOP}
+
+    Dziedziczenie w C++ jest sposobem na reprezentację relacji między typami
+    danych. Czyli jego \emph{pierwszorzędną} rolą jest zapewnienie hierarchii
+    typów, a dopiero \emph{drugorzędną} (niemal przy okazji) dziedziczenie
+    implementacji.
+
+    % \vspace{1em}
+
+    % Polimorfizm w C++ jest sposobem na podanie typu \emph{pochodnego} jako argumentu
+    % tam, gdzie parametr jest zadeklarowany jako typ \emph{bazowy}.
+
+    \vspace{1em}
+
+    Najprościej jak się da, nie ma co sobie komplikować życia. Jeśli chcemy
+    współdzielić implementację mamy do tego dedykowany mechanizm -
+    \emph{procedural abstraction}\footnote{patrz pierwszy wykład} czyli funkcje.
+\end{frame}
 
 %% po co dziedziczenie?
 %%      - ontological inheritance, specialisation: T is a specific kind of B
@@ -612,7 +725,7 @@ moredelim=**[is][\color{olive}]{$}{$}}
             składowe
         \item wytłumaczyć czym jest i jak działa funkcja składowa, oraz czym
             jest {\tt this}
-        \item powiedzieć jaka jest rola konstruktora i destruktura
+        \item powiedzieć jaka jest rola konstruktora
     \end{enumerate}
 \end{frame}
 
