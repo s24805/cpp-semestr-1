@@ -1,4 +1,4 @@
-\documentclass[aspectratio=169]{beamer}
+\documentclass[aspectratio=169,10pt]{beamer}
 
 \usepackage[utf8]{inputenc}
 \usepackage{textcomp}
@@ -96,9 +96,8 @@ moredelim=**[is][\color{olive}]{$}{$}}
     przykład rozmiar i zawartość wektora.
 
     Pola mogą być zmienne - jeśli ich wartości mogą podlegać modyfikacji w
-    trakcie życia obiektu\footnote{wymyślna alternatywa dla słowa ''wartość'' w
-    odniesieniu do złożonych typów} danego typu (np. rozmiar {\tt std::vector}),
-    albo stałe - jeśli nie podlegają modyfikacji (np. rozmiar {\tt std::array}).
+    trakcie życia obiektu danego typu (np. rozmiar {\tt std::vector}), albo
+    stałe - jeśli nie podlegają modyfikacji (np. rozmiar {\tt std::array}).
 
     \vspace{1em}
 
@@ -138,10 +137,6 @@ moredelim=**[is][\color{olive}]{$}{$}}
         bool now_you_dont { false };
     };
     \end{lstlisting}}
-
-    Po co jest widoczność? Niektóre pola w strukturze mogą nie być przeznaczone
-    dla ''użytkowników'' lub wymagać zachowania pewnych warunków. Jeśli jest
-    taka potrzeba zawsze można udzielić dostępu do pola przez funkcje składowe.
 \end{frame}
 
 \begin{frame}[fragile]
@@ -436,7 +431,7 @@ moredelim=**[is][\color{olive}]{$}{$}}
 
     {\tiny Przy okazji widać też jak można pobrać \emph{wskaźnik do składowej}
     (ang. \emph{pointer to member}). Nie jest to coś co często się przydaje, ale
-    na pewno częściej niż modyfikacja zmiennych składowych.}
+    na pewno częściej niż modyfikacja stałych składowych.}
 \end{frame}
 
 \section{Funkcje}
@@ -499,10 +494,15 @@ moredelim=**[is][\color{olive}]{$}{$}}
         \item konstruktora
     \end{enumerate}
 
+    Niech w funkcji main będzie utworzony obiekt reprezentujący was, a na
+    \texttt{std::cout} wydrukowany będzie wynik działania funkcji
+    \texttt{Student::to\_string} na tym obiekcie.
+
     \vspace{1em}
 
+    {\footnotesize
     Kod źródłowy w plikach {\tt include/s1234/Student.h} (nagłówek) i
-    {\tt src/s03-Student.cpp} (implementacja i funkcja {\tt main}).
+    {\tt src/s03-Student.cpp} (implementacja i funkcja {\tt main}).}
 \end{frame}
 
 \begin{frame}
@@ -524,10 +524,15 @@ moredelim=**[is][\color{olive}]{$}{$}}
         \item konstruktora
     \end{enumerate}
 
+    Niech w funkcji \texttt{main} pojawi się kod pozwalający na zweryfikowanie
+    działania waszej struktury danych dla godziny 23:59:59 (np. niech drukuje
+    godzinę, zwiększy mintę, wydrukuje znowu, itd.).
+
     \vspace{1em}
 
+    {\footnotesize
     Kod źródłowy w plikach {\tt include/s1234/Time.h} (nagłówek) i
-    {\tt src/s03-Time.cpp} (implementacja i funkcja {\tt main}).
+    {\tt src/s03-Time.cpp} (implementacja i funkcja {\tt main}).}
 \end{frame}
 
 \begin{frame}
@@ -539,10 +544,17 @@ moredelim=**[is][\color{olive}]{$}{$}}
     noc). Pora dnia powinna być opisana typem wyliczeniowym {\tt enum class
     Time\_of\_day}.
 
+    Napisać funkcję \texttt{to\_string(Time\_of\_day)} zwracającą
+    \texttt{std::string}, która zamieni wartość wyliczeniową na napis.
+
+    W funkcji main dodać kod pozwalający na zweryfikowanie działania dodanych
+    funkcji.
+
     \vspace{1em}
 
+    {\footnotesize
     Kod źródłowy w plikach {\tt include/s1234/Time.h} (nagłówek) i
-    {\tt src/s03-Time.cpp} (implementacja i funkcja {\tt main}).
+    {\tt src/s03-Time.cpp} (implementacja i funkcja {\tt main}).}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -563,15 +575,19 @@ moredelim=**[is][\color{olive}]{$}{$}}
 
     Umożliwią one arytmetykę (dodawanie, odejmowanie, porównywanie, itd.) na czasie.
 
+    Do funkcji \texttt{main} dodać kod, który pozwoli na zweryfikowanie
+    działania.
+
     \vspace{1em}
 
+    {\footnotesize
     Kod źródłowy w plikach {\tt include/s1234/Time.h} (nagłówek) i
-    {\tt src/s03-Time.cpp} (implementacja i funkcja {\tt main}).
+    {\tt src/s03-Time.cpp} (implementacja i funkcja {\tt main}).}
 \end{frame}
 
 \begin{frame}[fragile]
     \frametitle{Zadanie: sekundy do północy}
-    \label{lecture_exercise_3}
+    \label{lecture_exercise_4}
 
     Do struktury opisującej czas dodać funkcje składowe:
 
@@ -582,10 +598,18 @@ moredelim=**[is][\color{olive}]{$}{$}}
     auto time_to_midnight() const -> Time;
     \end{lstlisting}}
 
+    Funkcje \texttt{count\_seconds()} i \texttt{count\_minutes()} liczą sekundy
+    \emph{od} godziny 00:00:00.\\
+    Funkcja \texttt{time\_to\_midnight()} zwraca czas pozostały \emph{do} północy.
+
+    Do funkcji \texttt{main} dodać kod, który pozwoli na zweryfikowanie
+    działania.
+
     \vspace{1em}
 
+    {\footnotesize
     Kod źródłowy w plikach {\tt include/s1234/Time.h} (nagłówek) i
-    {\tt src/s03-Time.cpp} (implementacja i funkcja {\tt main}).
+    {\tt src/s03-Time.cpp} (implementacja i funkcja {\tt main}).}
 \end{frame}
 
 %% zewnętrzne
@@ -654,7 +678,7 @@ moredelim=**[is][\color{olive}]{$}{$}}
     \framesubtitle{OOP}
 
     Dziedziczenie (ang. \emph{inheritance}) polega na zbudowaniu jednego typu
-    (\emph{pochodnego}; ang.  \emph{derviced type}), w oparciu o drugi typ
+    (\emph{pochodnego}; ang.  \emph{derived type}), w oparciu o drugi typ
     (\emph{bazowy}; ang. \emph{base type}). Mówimy, że typ pochodny
     \emph{dziedziczy po} typie bazowym.
 
@@ -677,6 +701,13 @@ moredelim=**[is][\color{olive}]{$}{$}}
     Polimorfizm (ang. \emph{polymorphism}) polega na wykorzystaniu wspólnego
     interfejsu dla wielu typów. Typy prezentujące ten interfejs mogą być używane
     zamiennie.
+
+    \vspace{1em}
+
+    Polimorfizm w odniesieniu do funkcji oznacza, że może ona działać na wielu
+    typach.\footnote{Jest to \emph{de facto} druga strona tego co powiedzieliśmy
+    o typach, bo można powiedzieć, że funkcja akceptuje typy spełniające pewien
+    interfejs i w ten sposób zatoczyć koło.}
 
     \vspace{1em}
 
@@ -711,6 +742,29 @@ moredelim=**[is][\color{olive}]{$}{$}}
 %%      - abstract data type inheritance, substitution: T behaves as if it was B
 %%      - implementation inheritance, code sharing: T has all properties of B,
 %%        but augments them in certain ways
+
+\section{Zadania (OOP)}
+
+\begin{frame}
+    \frametitle{Zadanie: kalkulator}
+    \label{lecture_exercise_5}
+
+    Rozwinąć kalkulator napisany w stylu obiektowym tak, żeby nie odbiegał
+    funkcjonalnością od kalkulatora napisanego w stylu proceduralnym
+    zaimplementowanego w ramach poprzednich zajęć.
+
+    Kod do wystartowania znajduje się w repozytorium z
+    materiałami\footnote{\url{https://git.sr.ht/~maelkum/education-introduction-to-programming-cxx}}
+    w plikach \texttt{src/04-rpn-calculator-oo.cpp} (implementacja) i
+    \texttt{include/RPN\_calculator.h} (plik nagłówkowy).
+
+    \vspace{1em}
+
+    {\footnotesize
+    Wasz kod powinien znaleźć się w plikach
+    \texttt{src/s04-rpn-calculator-oo.cpp} (implementacja) i
+    \texttt{include/RPN\_calculator.h} (plik nagłówkowy).}
+\end{frame}
 
 \section{Podsumowanie}
 
