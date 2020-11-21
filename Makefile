@@ -10,6 +10,7 @@ CXXINCLUDES=\
 			-I./include
 
 CXXFLAGS=\
+		 -g \
 		 -std=$(CXXSTD) \
 		 $(CXXWARNINGS) \
 		 $(CXXINCLUDES)
