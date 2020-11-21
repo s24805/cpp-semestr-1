@@ -88,9 +88,9 @@ auto main(int argc, char* argv[]) -> int
 
     for (auto const& each : make_args(argc, argv)) {
         try {
+            using student::rpn_calculator::Addition;
             using student::rpn_calculator::Literal;
             using student::rpn_calculator::Print;
-            using student::rpn_calculator::Addition;
 
             if (each == "p") {
                 calculator.push(std::make_unique<Print>());
