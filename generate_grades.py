@@ -53,6 +53,7 @@ def main(args):
             ofstream.write('+------------+------\n')
             for date, grade in gs:
                 ofstream.write('| {} | {:4.2f}\n'.format(date['date'], grade))
+            ofstream.write('+------------+------\n')
 
     return 0
 
