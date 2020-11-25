@@ -12,6 +12,8 @@
 
 *.pdf
 
+grades/*
+
 .*
 !.gitkeep
 !.gitignore
