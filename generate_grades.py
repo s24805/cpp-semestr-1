@@ -13,8 +13,10 @@ def main(args):
         grades_source = json.loads(ifstream.read())
 
     meetings = grades_source['meetings']
+    print('students: {}'.format(len(grades_source['students'].keys())))
     print('meetings: {}'.format(', '.join(map(lambda _: _['date'], meetings))))
 
+    failing_students = []
     for index, data in grades_source['students'].items():
         name = data['name']
         nick = (data['nick'] or None)
@@ -30,6 +32,8 @@ def main(args):
             gs.append((date, grade,))
 
         average_grade = sum(map(lambda _: _[1], gs)) / len(gs)
+        if average_grade < 3:
+            failing_students.append((index, name, nick, average_grade,))
 
         print('  s{}: {} ({}): {:4.2f}'.format(
             index,
@@ -54,6 +58,11 @@ def main(args):
             for date, grade in gs:
                 ofstream.write('| {} | {:4.2f}\n'.format(date['date'], grade))
             ofstream.write('+------------+------\n')
+
+    print('failing: {}'.format(len(failing_students)))
+    for index, name, nick, average_grade in failing_students:
+        print('  s{}: {} ({}): {:4.2f}'.format(index, name, nick,
+            average_grade))
 
     return 0
 
