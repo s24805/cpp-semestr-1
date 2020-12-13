@@ -13,7 +13,8 @@ CXXFLAGS=\
 		 -g \
 		 -std=$(CXXSTD) \
 		 $(CXXWARNINGS) \
-		 $(CXXINCLUDES)
+		 $(CXXINCLUDES) \
+		 -lpthread
 
 all:\
 	build/00-hello-world.bin \
