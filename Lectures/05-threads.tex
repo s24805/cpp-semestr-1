@@ -22,7 +22,7 @@
 \setbeamercolor{lower separation line foot}{bg=xbarcolor}
 
 \title{Podstawy programownia (w języku C++)}
-\subtitle{Wątki i operacje I/O}
+\subtitle{Wątki}
 \author{Marek Marecki}
 \institute{Polsko-Japońska Akademia Technik Komputerowych}
 
@@ -453,33 +453,6 @@ moredelim=**[is][\color{olive}]{$}{$}}
     \vspace{1em}
 
     Kod w pliku \texttt{src/s05-sleeping-threads-3.cpp}
-\end{frame}
-
-\begin{frame}[fragile]
-    \frametitle{Zadanie: ping-pong}
-    \framesubtitle{\texttt{std::thread}}
-    \label{lecture_exercise_6}
-
-    {\small
-    Uruchom dwa wątki - jeden z identyfikatorem ,,ping'', drugi ,,pong''.
-    Niech oba wątki wymieniają się liczbą całkowitą ,,odbijając'' ją między
-    sobą.
-
-    Wątek powinien relizować w pętli następującą logikę:
-    \begin{enumerate}
-        \item czekać na komunikat o otrzymaniu liczby
-        \item wydrukować liczbę poprzedzoną swoim identyfikatorem (np.
-            \texttt{ping 7})
-        \item zwiększyć liczbę o losową wartość między 1, a 42
-        \item poinformować drugi wątek o tym, że teraz jego kolej
-        \item jeśli liczba była większa niż 1024 zakończyć działanie
-    \end{enumerate}
-
-    Pierwszą liczbę wyślij do wątku ,,ping'' z funkcji \texttt{main()}.
-
-    \vspace{1em}
-
-    Kod w pliku \texttt{src/s05-ping-pong.cpp}}
 \end{frame}
 
 \begin{frame}[fragile]
