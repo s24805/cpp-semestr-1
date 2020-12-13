@@ -14,7 +14,7 @@ auto printer(itp::channel<std::string>& ch) -> void
     while (not message.empty()) {
         std::cout << message << "\n";
         try {
-            message = ch.wait_for(std::chrono::seconds{1});
+            message = ch.wait_for(std::chrono::milliseconds{334});
         } catch (itp::timeout_expored_error const&) {
             // timeout expired, ignore
         }
@@ -26,7 +26,7 @@ auto printer(itp::channel<std::string>& ch) -> void
 auto main() -> int
 {
     auto ch = itp::channel<std::string>{};
-    std::thread{printer, std::ref(ch)}.detach();
+    auto th = std::thread{printer, std::ref(ch)};
 
     {
         auto message = std::string{};
@@ -35,6 +35,8 @@ auto main() -> int
             ch.push(message);
         } while (not message.empty());
     }
+
+    th.join();
 
     return 0;
 }
