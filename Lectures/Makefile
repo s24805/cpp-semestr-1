@@ -20,8 +20,7 @@ watch:
 	( find . -name '*.tex' -type f ; find . -name '*.bib' -type f) \
 		| entr -pc make again
 
-clean:
-	rm *.pdf || true
+clean-garbage:
 	rm *.dvi || true
 	rm *.log || true
 	rm *.aux || true
@@ -31,3 +30,8 @@ clean:
 	rm *.snm || true
 	rm *.vrb || true
 	rm *.synctex.gz || true
+
+clean-all: clean-garbage
+	rm *.pdf || true
+
+clean: clean-garbage
