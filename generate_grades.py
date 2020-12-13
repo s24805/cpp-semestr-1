@@ -22,7 +22,8 @@ def main(args):
         nick = (data['nick'] or None)
 
         gs = []
-        for i, date in enumerate(meetings):
+        for i, date in filter(lambda x: not x[1].get('empty', False),
+                enumerate(meetings)):
             grade = 2.0
             try:
                 grade = data['grades'][i]
