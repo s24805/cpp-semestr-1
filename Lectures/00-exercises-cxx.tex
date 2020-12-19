@@ -60,7 +60,7 @@ moredelim=**[is][\color{olive}]{$}{$}}
 
 \section{Podstawy}
 
-\begin{figure}
+\begin{figure}[!htp]
 \begin{lstlisting}[caption={Hello, World!},
     captionpos=b,
     label=listing_0000,
@@ -79,7 +79,7 @@ auto main() -> int
 \ref{listing_0000} tak żeby wyświetlał twoje imię i nazwisko, lub
 jakiś inny wybrany tekst.
 
-\begin{figure}
+\begin{figure}[!htp]
 \begin{lstlisting}[caption={Hello, World!},
     captionpos=b,
     label=listing_0001,
@@ -114,7 +114,7 @@ Wynik wydrukuj na \texttt{std::cout}.
 \paragraph{Wartość absolutna} Napisz program, który pobierze od użytkownika
 liczbę i poda jej wartość absolutną. Wynik wydrukuj na \texttt{std::cout}.
 
-\begin{figure}
+\begin{figure}[!htp]
 \begin{lstlisting}[caption={relacja między liczbami},
     captionpos=b,
     label=listing_0001_comparison]
@@ -177,7 +177,7 @@ i sprawdzi czy jest ona liczbą pierwszą. Jeśli tak, to niech poda sumę liczb
 pierwszych mniejszych lub równych podanej liczbie.
 Wynik wydrukuj na \texttt{std::cout}.
 
-\begin{figure}
+\begin{figure}[!htp]
 \begin{lstlisting}[caption={relacja między liczbami (2)},
     captionpos=b,
     label=listing_0001_comparison_2]
@@ -201,7 +201,7 @@ od zera, ale mniejszych lub równych \emph{limitowi}, które są podzielne przez
 \emph{dzielnik}.
 Wynik wydrukuj na \texttt{std::cout}.
 
-\begin{figure}
+\begin{figure}[!htp]
 \begin{lstlisting}[caption={pętla for},
     captionpos=b,
     label=listing_0002]
@@ -211,7 +211,7 @@ for (auto i = 0; i < 42; ++i) {
 \end{lstlisting}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[!htp]
 \begin{lstlisting}[caption={pętla while},
     captionpos=b,
     label=listing_0003]
@@ -223,7 +223,7 @@ while (i < 42) {
 \end{lstlisting}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[!htp]
 \begin{lstlisting}[caption={pętla do-while},
     captionpos=b,
     label=listing_0004]
@@ -247,7 +247,7 @@ obliczy jej silnię. Wynik wydrukuj na \texttt{std::cout}.
 \ref{listing_0004}) napisz program, który pobierze od użytkownika liczbę i
 obliczy jej silnię. Wynik wydrukuj na \texttt{std::cout}.
 
-\begin{figure}
+\begin{figure}[!htp]
 \begin{lstlisting}[caption={prostokąt z gwiazdek},
     captionpos=b,
     label=listing_0005]
@@ -257,7 +257,7 @@ $./program-prostokat 2 4$
 \end{lstlisting}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[!htp]
 \begin{lstlisting}[caption={trójkąt gwiazdek},
     captionpos=b,
     label=listing_0006]
@@ -269,7 +269,7 @@ $./program-odwrocony-trojkat 4$
 \end{lstlisting}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[!htp]
 \begin{lstlisting}[caption={odwrócony trójkąt gwiazdek},
     captionpos=b,
     label=listing_0007]
@@ -296,7 +296,7 @@ napisz program, który pobierze z wiersza poleceń wymiary ,,odwróconego
 trójkąta'' (tj.  niech wierzchołek będzie na dole, patrz listing
 \ref{listing_0007}) i narysuje go. Wynik wydrukuj na \texttt{std::cout}.
 
-\begin{figure}
+\begin{figure}[!htp]
 \begin{lstlisting}[caption={pusty kwardat},
     captionpos=b,
     label=listing_0008]
@@ -318,6 +318,57 @@ Wynik wydrukuj na \texttt{std::cout}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 \section{Wskaźniki}
+
+\begin{lstlisting}[caption={pobranie wskaźnika},
+    captionpos=b,
+    label=listing_howto_address_of]
+auto x  = int{42};  $// an integer$
+auto xp = &x;       $// a pointer to an integer (new style)$
+int* xo = &x;       $// a pointer to an integer (old style)$
+\end{lstlisting}
+
+\begin{lstlisting}[caption={dereferencja wskaźnika},
+    captionpos=b,
+    label=listing_howto_pointer_dereference]
+auto x = int{42};
+auto xp = &x;   $// xp contains the address of the x variable$
+auto xd = *xp;  $// xd contains a copy of the variable to which
+                // xp is pointing$
+
+*xp = 64;       $// x contains 64 after this assignment$
+\end{lstlisting}
+
+\paragraph{Pobranie wskaźnika} Napisz program, w którym w funkcji
+\texttt{main()} utworzysz zmienną typu \texttt{std::string}, której wartością
+będzie \texttt{Hello, World!}. Pobierz wskaźnik i wydrukuj adres tej zmiennej w
+pamięci.\\
+Wynik wydrukuj na \texttt{std::cout}.
+
+\paragraph{Dereferencja}  Napisz funkcję \texttt{print()}, która będzie
+jako parametr przyjmować wskaźnik na \texttt{std::string}. W funkcji
+\texttt{print()} wydrukuj adres, na który wskazuje wskaźnik oraz napis stojący
+za tym wskaźnikiem, np. ,,\texttt{1781f89a980 = Hello, World!}''. W funkcji
+\texttt{main()} napisz kod, który wywołuje funkcję \texttt{print()}.
+Wynik wydrukuj na \texttt{std::cout}.
+
+\begin{figure}[!htp]
+\begin{lstlisting}[caption={zamiana},
+    captionpos=b,
+    label=listing_0009_swap]
+$./program-zamiana$
+42 64
+64 42
+\end{lstlisting}
+\end{figure}
+
+\paragraph{Zamiana} Napisz funkcję \texttt{swap()}, która będzie
+jako parametr przyjmować dwa wskaźniki na \texttt{int}.
+
+W funkcji \texttt{main()} napisz kod, który wywołuje funkcję \texttt{swap()}.
+Wydrukuj wartość dwóch testowych liczb przed i po zamianie (patrz listing
+\ref{listing_0009_swap}.
+
+Wynik wydrukuj na \texttt{std::cout}.
 
 % \newpage
 
