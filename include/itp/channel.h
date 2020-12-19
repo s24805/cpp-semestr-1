@@ -8,7 +8,7 @@
 #include <condition_variable>
 
 namespace itp {
-    struct timeout_expored_error : public std::runtime_error {
+    struct timeout_expired_error : public std::runtime_error {
         using runtime_error::runtime_error;
     };
 
@@ -52,7 +52,7 @@ namespace itp {
             cv.wait_for(lck, duration, [this]{ return (not q.empty()); });
 
             if (q.empty()) {
-                throw timeout_expored_error{"channel::wait_for()"};
+                throw timeout_expired_error{"channel::wait_for()"};
             }
 
             return pop();

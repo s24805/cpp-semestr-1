@@ -15,7 +15,7 @@ auto printer(itp::channel<std::string>& ch) -> void
         std::cout << message << "\n";
         try {
             message = ch.wait_for(std::chrono::milliseconds{334});
-        } catch (itp::timeout_expored_error const&) {
+        } catch (itp::timeout_expired_error const&) {
             // timeout expired, ignore
         }
     }
