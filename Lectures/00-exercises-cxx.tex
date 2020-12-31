@@ -281,7 +281,9 @@ $./program-odwrocony-trojkat 4$
 \end{lstlisting}
 \end{figure}
 
-\paragraph{Rysowanie figury (prostokąt)} Wykorzystując dowolną pętlę napisz
+\paragraph{Rysowanie figury (prostokąt)}
+\label{ex_1_draw_a_rectangle_on_stdout}
+Wykorzystując dowolną pętlę napisz
 program, który pobierze z wiersza poleceń wymiary prostokąta i narysuje go.
 Wynik wydrukuj na \texttt{std::cout}. Przykładowe uruchomienie na listingu
 \ref{listing_0005}.
@@ -366,9 +368,111 @@ jako parametr przyjmować dwa wskaźniki na \texttt{int}.
 
 W funkcji \texttt{main()} napisz kod, który wywołuje funkcję \texttt{swap()}.
 Wydrukuj wartość dwóch testowych liczb przed i po zamianie (patrz listing
-\ref{listing_0009_swap}.
+\ref{listing_0009_swap}).
 
 Wynik wydrukuj na \texttt{std::cout}.
+
+\paragraph{\texttt{memset(3)}} Zaimplementuj funkcję \texttt{memset(3)}. Jej
+opis znajduje się w podręczniku użytkownika systemu. Można go wyświetlić
+używając polecenia `\texttt{man 3 memset}'.
+
+\paragraph{\texttt{memcpy(3)}} Zaimplementuj funkcję \texttt{memcpy(3)}.
+
+\paragraph{\texttt{memfrob(3)}} Zaimplementuj funkcję \texttt{memfrob(3)}.
+
+\paragraph{\texttt{memrev()}} Zaimplementuj funkcję \texttt{memrev(void* s,
+size\_t n)}, która odwróci kolejność bajtów w obszarze pamięci o rozmiarze
+\texttt{n}, na który wskazuje wskaźnik \texttt{s}.
+
+\paragraph{\texttt{memrand()}} Zaimplementuj funkcję \texttt{memrev(void* s,
+size\_t n)}, która wypełni losowymi bajtami obszar pamięci o rozmiarze
+\texttt{n}, na który wskazuje wskaźnik \texttt{s}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Struktury danych
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Struktury danych}
+
+Dla każdego zadania powinna być napisana funkcja \texttt{main()}, która będzie
+testować działanie zaimplementowanej struktury (lub struktur) danych wywołując
+jej funkcje składowe.
+
+O ile nie jest powiedziane inaczej, w funkcji \texttt{main()} dane (np. długości
+boków, ilości żyć, itd.) mogą być wpisane ,,na sztywno'' podczas tworzenia
+obiektów danej struktury danych i nie muszą być wczytywane od użytkownika.
+
+\begin{figure}[!htp]
+{\small
+\begin{lstlisting}[caption={struct},
+    captionpos=b,
+    label=listing_0010_struct]
+struct A_type {
+    std::string member_variable;
+    int const member_constant;
+
+    auto member_function() -> std::string;
+};
+
+auto A_type::member_function() -> std::string
+{
+    return (member_variable
+            + ": "
+            + std::to_string(member_constant));
+}
+\end{lstlisting}}
+\end{figure}
+
+\begin{figure}[!htp]
+{\small
+\begin{lstlisting}[caption={konstruktor},
+    captionpos=b,
+    label=listing_0011_ctor]
+struct @Foo@ {
+    std::string const bar;
+
+    $// ctor's name must be the same as struct's name$
+    @Foo@(std::string);
+};
+
+@Foo@::@Foo@(std::string b)
+    : bar{std::move(b)}
+{}
+\end{lstlisting}}
+\end{figure}
+
+\paragraph{Kwadrat} Zaprojektur strukturę danych reprezentującą kwadrat. Niech
+posiada ona jedno stałe pole typu \texttt{float}, które będzie reprezentowało
+długość boku kwadratu. Wartość musi być inicjalizowana w konstruktorze.
+
+Struktura ma posiadać dwie funkcje składowe:
+\begin{enumerate}
+    \item \texttt{auto area() const -> float} zwracającą pole kwadratu
+    \item \texttt{auto draw() const -> void} rysującą kwadrat na ekranie (tak
+        jak w zadaniu \ref{ex_1_draw_a_rectangle_on_stdout})
+\end{enumerate}
+
+\paragraph{Prostokąt} Zaprojektur strukturę danych reprezentującą prostokąt.
+Niech ma ona dwa stałe pola reprezentujące długości dwóch boków prostokąta.
+
+Struktura ma posiadać dwie funkcje składowe:
+\begin{enumerate}
+    \item \texttt{auto area() const -> float} zwracającą pole prostokąta
+    \item \texttt{auto draw() const -> void} rysującą prostokąt na ekranie (tak
+        jak w zadaniu \ref{ex_1_draw_a_rectangle_on_stdout})
+\end{enumerate}
+
+\paragraph{Prostokąt (2)} Zmodyfikuj kod poprzedniego zadania tak, aby możliwe
+było dodanie funkcji składowej \texttt{auto scale(float const x, float const y) -> void}.
+Funkcja \texttt{resize()} ma skalować rozmiar boków prostokąta przez pewien
+mnożnik.\\
+Przykłady:
+\begin{enumerate}
+    \item \texttt{rect.scale(1.5f, 1.5f)} wydłuży oba boki prostokąta o 50\%
+    \item \texttt{rect.scale(2.0f, 0.5f)} wydłuży jeden bok prostokąta
+        dwukrotnie, a drugi skróci dwukrotnie
+\end{enumerate}
+
 
 % \newpage
 
