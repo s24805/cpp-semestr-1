@@ -316,10 +316,74 @@ listing \ref{listing_0008}). Wymiar nie może być mniejszy niż 3.
 Wynik wydrukuj na \texttt{std::cout}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Pointers
+% Arrays and pointers
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
-\section{Wskaźniki}
+\section{Tablice i wskaźniki}
+
+Dla każdego zadania w funkcji \texttt{main()} przetestuj działanie kodu.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Arrays
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Tablice}
+
+\begin{lstlisting}[caption={tworzenie i użycie tablicy},
+    captionpos=b,
+    label=listing_howto_array]
+int array_of_int[2]; $// array with two elements$
+array_of_int[0] = 1; $// first element now contains 1$
+array_of_int[1] = 2;
+
+$// read an element and print it on standard output$
+std::cout << array_of_int[0] << "\n";
+
+$// change value of an element$
+int i = 0;
+array_of_int[i] = 42;
+\end{lstlisting}
+
+\paragraph{Inicjalizacja} Napisz funkcję \texttt{auto init(int a[], int n) ->
+void}, która zainicjalizuje zerami tablicę \texttt{a} o rozmiarze \texttt{n}.
+
+\paragraph{Inicjalizacja (2)} Napisz funkcję \texttt{auto iota(int a[], int n,
+int start) -> void}, która zainicjalizuje tablicę \texttt{a} o rozmiarze
+\texttt{n} kolejnymi liczbami całkowitymi zaczynając od \texttt{start}.\\
+Przykład: dla wywołania \texttt{iota(a, 4, 5)} tablica \texttt{a} zawierałaby
+liczby 5, 6, 7, i 8.
+
+\paragraph{Suma} Napisz funkcję \texttt{auto asum(int a[], int n) -> int}, która
+zwróci sumę liczb w tablicy \texttt{a} o rozmiarze \texttt{n}.
+
+\paragraph{Minimum} Napisz funkcję \texttt{auto amin(int a[], int n) ->
+int}, która zwróci indeks najmniejszej wartości w tablicy \texttt{a} o rozmiarze
+\texttt{n}.
+
+\paragraph{Maksimum} Napisz funkcję \texttt{auto amax(int a[], int n) ->
+int}, która zwróci indeks największej wartości w tablicy \texttt{a} o rozmiarze
+\texttt{n}.
+
+\paragraph{Przeszukiwanie} Napisz funkcję \texttt{auto search(int a[], int n,
+int needle) -> int}, która w tablicy \texttt{a} o rozmiarze \texttt{n} będzie
+szukać wartości równej \texttt{needle}. Jeśli tablica zawiera taką wartość niech
+funkcja zwróci jej indeks; w przeciwnym wypadku niech zwróci -1.
+
+\paragraph{Sortowanie} Napisz funkcję \texttt{auto sort\_asc(int a[], int n) ->
+void}, która ułoży liczby w tablicy \texttt{a} o rozmiarze \texttt{n} w
+kolejności rosnącej. Użyj dowolnego algorytmu.
+
+\paragraph{Sortowanie (2)} Napisz funkcję \texttt{auto sort\_desc(int a[], int n) ->
+void}, która ułoży liczby w tablicy \texttt{a} o rozmiarze \texttt{n} w
+kolejności malejącej. Użyj dowolnego algorytmu.
+
+\paragraph{Sortowanie (szybkie)} Napisz funkcję \texttt{auto quicksort(int a[], int n) ->
+void}, która posortuje tablicą \texttt{a} o rozmiarze \texttt{n} za pomocą
+algorytmu Quicksort\footnote{\url{https://en.wikipedia.org/wiki/Quicksort}}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Pointers
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Wskaźniki}
 
 \begin{lstlisting}[caption={pobranie wskaźnika},
     captionpos=b,
@@ -387,6 +451,83 @@ size\_t n)}, która odwróci kolejność bajtów w obszarze pamięci o rozmiarze
 \paragraph{\texttt{memrand()}} Zaimplementuj funkcję \texttt{memrev(void* s,
 size\_t n)}, która wypełni losowymi bajtami obszar pamięci o rozmiarze
 \texttt{n}, na który wskazuje wskaźnik \texttt{s}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Arrays and pointers
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Tablice i wskaźniki}
+
+\begin{figure}[!htp]
+{\small
+\begin{lstlisting}[caption={wskaźnik do funkcji},
+    captionpos=b,
+    label=listing_0011_function_pointer]
+auto some_function(int const) -> void;
+
+auto fp = &some_function; $// take address of some_function$
+(*fp)(42);                $// dereference is needed for the call$
+\end{lstlisting}}
+\end{figure}
+
+\paragraph{Wywołanie przez wskaźnik} Napisz funkcję o podanej sygnaturze:\\
+\texttt{auto call\_with\_random\_int(void (*fp)(int const)) -> void;}
+
+Niech funkcja \texttt{call\_with\_random\_int()} pobiera wskaźnik na funkcję
+(patrz listing \ref{listing_0011_function_pointer}), a następnie wywoła ją
+podając jej losową liczbę całkowitą jako argument.
+
+\paragraph{\texttt{all()}} Napisz funkcję o podanej sygnaturze:\\
+\texttt{auto all(void* a[], size\_t n, bool (*fp)(void*)) -> bool;}
+
+Niech zwraca ona \texttt{true} jeśli dla każdego elementu tablicy \texttt{a} o
+rozmiarze \texttt{n} funkcja, której adres przekazany jest w parametrze
+\texttt{fp} zwraca \texttt{true}.
+
+\paragraph{\texttt{any()}} Napisz funkcję o podanej sygnaturze:\\
+\texttt{auto any(void* a[], size\_t n, bool (*fp)(void*)) -> bool;}
+
+Niech zwraca ona \texttt{true} jeśli dla co najmniej jednego elementu tablicy
+\texttt{a} o rozmiarze \texttt{n} funkcja, której adres przekazany jest w
+parametrze \texttt{fp} zwraca \texttt{true}.
+
+\paragraph{Drukowanie} Napisz funkcję
+\texttt{auto fpprint(void* a[], size\_t n, void (*fp)(void*)) -> void}, która
+wydrukuje elementy tablicy \texttt{a} o rozmiarze \texttt{n}. Elementy powinny
+być drukowane używając funkcji, której adres przekazany jest we wskaźniku
+\texttt{fp}. Używanie wskaźników do funkcji pokazane jest na listingu
+\ref{listing_0011_function_pointer}.
+
+Użyj tej funkcji do wydrukowania tablicy wartości \texttt{int}, oraz tablicy
+wartości \texttt{std::string}. Będzie to wymagało napisania dodatkowych funkcji
+drukujących odpowiednie te typy, ale pobierających je przez wskaźnik
+\texttt{void*}:
+\texttt{auto print\_int(void*) -> void}, \texttt{auto print\_str(void*) ->
+void}.
+
+Wynik (dla tablicy dwóch napisów) powinien wyglądać mniej więcej tak:\\
+\begin{lstlisting}
+[0] = Hello
+[1] = World
+\end{lstlisting}
+
+\paragraph{Wyszukiwanie} Napisz funkcję o podanej sygnaturze:\\
+\texttt{auto fpsearch(void* a[], size\_t n, bool (*fp)(void*, void*), void*
+needle) -> ssize\_t;}
+
+Niech ta funkcja przeszuka tablicę \texttt{a} o rozmiarze \texttt{n} i zwróci
+indeks elementu, który będzie równy wartości, której adres przekazany jest w
+parametrze \texttt{needle}.
+
+Do porównaniem wartości należy wykorzystać funkcję, której adres przekazany jest
+w parametrze \texttt{fp}. Funkcja ta otrzymuje dwa wskaźniki \texttt{void*},
+które wskazują na dwie wartości - element tablicy, i poszukiwaną wartość.
+
+\paragraph{Sortowanie} Napisz funkcję o podanej sygnaturze:\\
+\texttt{auto fpsort(void* a[], size\_t n, int (*fp)(void*, void*)) -> void;}
+
+Niech ta funkcja posortuje tablicę \texttt{a} o rozmiarze \texttt{n}. Do
+porównywania elementów należy wykorzystać funkcję, której adres przekazany jest
+w parametrze \texttt{fp}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Struktury danych
@@ -473,6 +614,118 @@ Przykłady:
         dwukrotnie, a drugi skróci dwukrotnie
 \end{enumerate}
 
+\paragraph{Temperatura (°C)}\label{ex_0000_struct_temperature_celsius}
+Zaprojektuj struktorę danych reprezentującą temperaturję w stopniach
+Celsjusza\footnote{\url{https://en.wikipedia.org/wiki/Celsius}} (patrz listing
+\ref{listing_0012_temp_celsius}). Jeśli w konstrutorze zostanie podana
+temperatura mniejsza niż -273.15 °C to powinna zostać ona ,,obcięta'' do tej
+wartości. Nie ma górnego ograniczenia.
+
+Dodaj do struktury funkcję składową \texttt{auto to\_string() const ->
+std::string}, która będzie produkować napisy reprezentujące temperaturę (tj.
+ilość stopni, spacja, i `\texttt{°C}').
+
+\begin{figure}[!htp]
+{\small
+\begin{lstlisting}[caption={struktura reprezentująca temperaturę w °C},
+    captionpos=b,
+    label=listing_0012_temp_celsius]
+struct Celsius {
+    $// add necessary fields here$
+    $// add ctor here$
+    auto to_string() const -> std::string;
+};
+\end{lstlisting}}
+\end{figure}
+
+\paragraph{Temperatura (°F)}\label{ex_0000_struct_temperature_fahrenheit} Tak jak w zadaniu
+\ref{ex_0000_struct_temperature_celsius}, ale dla temperatury w stopniach
+Fahrenheita\footnote{\url{https://en.wikipedia.org/wiki/Fahrenheit}}.
+
+\paragraph{Temperatura (K)}\label{ex_0000_struct_temperature_kelvin} Tak jak w zadaniu
+\ref{ex_0000_struct_temperature_celsius}, ale dla temperatury w
+Kelwinach\footnote{\url{https://en.wikipedia.org/wiki/Kelvin}}. Pamiętaj, że
+temperatura w Kelwinach nie może spaść poniżej zera (zero Kelwinów to tzw.
+,,zero absolutne'').
+
+\paragraph{Arytmetyka} Do struktur danych napisanych w zadaniach
+\ref{ex_0000_struct_temperature_celsius},
+\ref{ex_0000_struct_temperature_fahrenheit}, i
+\ref{ex_0000_struct_temperature_kelvin} dodaj operatory dodawania (\texttt{+}) i
+odejmowania (\texttt{-}). Przykładowa implementacja operatorów pokazana jest na
+listingu \ref{listing_0000_operator_implemetation}.
+
+\paragraph{Porównania}\label{ex_0000_comparison_ops} Do struktur danych napisanych w zadaniach
+\ref{ex_0000_struct_temperature_celsius},
+\ref{ex_0000_struct_temperature_fahrenheit}, i
+\ref{ex_0000_struct_temperature_kelvin} dodaj operatory porówniania:
+\texttt{==} (równe),
+\texttt{!=} (nierówne),
+\texttt{<},
+\texttt{<=} (mniejsze lub równe),
+\texttt{>}, i
+\texttt{>=} (większe lub równe).
+Przykładowa implementacja operatorów pokazana jest na
+listingu \ref{listing_0000_operator_implemetation}.
+
+\begin{figure}[!htp]
+{\small
+\begin{lstlisting}[caption={implementacja operatora},
+    captionpos=b,
+    label=listing_0000_operator_implemetation]
+`struct Foo {
+    int field { 0 };`
+
+    auto operator+(Foo const&) const -> Foo;
+    auto operator<(Foo const&) const -> Foo;
+    `Foo(int const);
+};
+
+Foo::Foo(int const x): field{x}
+{}`
+
+auto Foo::operator+(Foo const& x) const -> Foo
+{
+    return Foo{ field + x.field };
+}
+
+auto Foo::operator<(Foo const& x) const -> bool
+{
+    return field < x.field;
+}
+\end{lstlisting}}
+\end{figure}
+
+\paragraph{Konwersje} Do struktur danych napisanych w zadaniach
+\ref{ex_0000_struct_temperature_celsius},
+\ref{ex_0000_struct_temperature_fahrenheit}, i
+\ref{ex_0000_struct_temperature_kelvin} dodaj konstruktory pozwalające na
+konwersję temperatur w każdy możliwy sposób. Napisz kod, który sprawdzi czy
+dodawanie temperatur w różnych skalach działa poprawnie. Konwersje do napisania
+to:
+\begin{enumerate}
+    \item z °C na °F (sygnatura \texttt{Fahrenheit(Celsius const)})
+    \item z °C na K (sygnatura \texttt{Kelvin(Celsius const)})
+    \item z °F na °C (sygnatura \texttt{Celsius(Fahrenheit const)})
+    \item z °F na K (sygnatura \texttt{Kelvin(Fahrenheit const)})
+    \item z K na °C (sygnatura \texttt{Celsius(Kelvin const)})
+    \item z K na °F (sygnatura \texttt{Fahrenheit(Kelvin const)})
+\end{enumerate}
+
+\paragraph{Kąty} Zaprojektuj strukturę danych, która będzie reprezentować miarę
+kąta\footnote{\url{https://pl.wikipedia.org/wiki/Miara_k\%C4\%85ta}} z użyciem miary
+stopniowej\footnote{\url{https://pl.wikipedia.org/wiki/Stopień_(k\%C4\%85t)}}:
+\texttt{Arc\_degree}.
+Dodaj do struktury konstruktor, który zapewni, że wartość kąta będzie zawsze
+między 0°, a 360°. Dodaj do struktury operatory arytmetyczne dodawania i
+odejmowania, oraz operatory porównania (patrz zadanie
+\ref{ex_0000_comparison_ops}).
+
+\paragraph{Kąty (2)} Zaprojektuj strukturę danych, która będzie reprezentować
+miarę kąta w radianach\footnote{\url{https://pl.wikipedia.org/wiki/Radian}}:
+\texttt{Radian}. Dodaj dla niej operatory arytmetyczne i porównania, oraz zadbaj
+o możliwość konwersji między strukturami \texttt{Radian} i \texttt{Arc\_degree}.
+Przetestuj swój kod.
 
 % \newpage
 
