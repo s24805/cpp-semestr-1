@@ -22,17 +22,20 @@ def main(args):
         nick = (data['nick'] or None)
 
         gs = []
-        for i, date in filter(lambda x: not x[1].get('empty', False),
-                enumerate(meetings)):
+        for i, m in enumerate(meetings):
             grade = 2.0
             try:
                 grade = data['grades'][i]
             except IndexError:
                 pass
 
-            gs.append((date, grade,))
+            if m.get('empty', False):
+                grade = 0.0
 
-        average_grade = sum(map(lambda _: _[1], gs)) / len(gs)
+            gs.append((m, grade,))
+
+        gs_useful = list(filter(lambda _: _[1], gs))
+        average_grade = sum(map(lambda _: _[1], gs_useful)) / len(gs_useful)
         if average_grade < 3:
             failing_students.append((index, name, nick, average_grade,))
 
@@ -57,7 +60,11 @@ def main(args):
             ofstream.write('|       Data | Ocena\n')
             ofstream.write('+------------+------\n')
             for date, grade in gs:
-                ofstream.write('| {} | {:4.2f}\n'.format(date['date'], grade))
+                ofstream.write('| {} | {:4.2f} ({})\n'.format(
+                    date['date'],
+                    grade,
+                    date['comment'],
+                ))
             ofstream.write('+------------+------\n')
 
     print('failing: {}'.format(len(failing_students)))
