@@ -3,7 +3,10 @@
 *.bin
 
 *.aux
+*.lof
 *.log
+*.lol
+*.lot
 *.nav
 *.out
 *.snm
