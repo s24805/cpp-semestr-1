@@ -4,7 +4,8 @@ all: \
 	02-first-steps.pdf \
 	03-loops.pdf \
 	04-data-structures.pdf \
-	05-threads.pdf
+	05-threads.pdf \
+	06-io.pdf
 
 %.pdf: %.tex
 	pdflatex -halt-on-error $^
