@@ -328,6 +328,7 @@ Dla każdego zadania w funkcji \texttt{main()} przetestuj działanie kodu.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Tablice}
 
+\begin{figure}
 \begin{lstlisting}[caption={tworzenie i użycie tablicy},
     captionpos=b,
     label=listing_howto_array]
@@ -341,7 +342,10 @@ std::cout << array_of_int[0] << "\n";
 $// change value of an element$
 int i = 0;
 array_of_int[i] = 42;
+
+foo(array_of_int, 2);  $// example function call$
 \end{lstlisting}
+\end{figure}
 
 \paragraph{Inicjalizacja} Napisz funkcję \texttt{auto init(int a[], int n) ->
 void}, która zainicjalizuje zerami tablicę \texttt{a} o rozmiarze \texttt{n}.
@@ -352,21 +356,48 @@ int start) -> void}, która zainicjalizuje tablicę \texttt{a} o rozmiarze
 Przykład: dla wywołania \texttt{iota(a, 4, 5)} tablica \texttt{a} zawierałaby
 liczby 5, 6, 7, i 8.
 
+\begin{figure}
+{\small
+\begin{lstlisting}[caption={przykładowa tablica w stylu C++},
+    captionpos=b,
+    label=listing_0012_example_array]
+std::array<int, 10> example { 42, 9, -1, 18, 59, 3, 101, 31, 72, 12 };
+
+std::cout << example[0] << "\n";
+
+int i = 0;
+example[i] = 42;
+
+foo(example.data(), example.size());  $// example function call$
+\end{lstlisting}}
+\end{figure}
+
 \paragraph{Suma} Napisz funkcję \texttt{auto asum(int a[], int n) -> int}, która
-zwróci sumę liczb w tablicy \texttt{a} o rozmiarze \texttt{n}.
+zwróci sumę liczb w tablicy \texttt{a} o rozmiarze \texttt{n}. Przykładowa
+tablica do wykorzystania na listingu \ref{listing_0012_example_array}.
 
 \paragraph{Minimum} Napisz funkcję \texttt{auto amin(int a[], int n) ->
 int}, która zwróci indeks najmniejszej wartości w tablicy \texttt{a} o rozmiarze
 \texttt{n}.
 
+Dla przykładowej tablicy z listingu \ref{listing_0012_example_array} powinno być
+zwrócone -1.
+
 \paragraph{Maksimum} Napisz funkcję \texttt{auto amax(int a[], int n) ->
 int}, która zwróci indeks największej wartości w tablicy \texttt{a} o rozmiarze
 \texttt{n}.
 
+Dla przykładowej tablicy z listingu \ref{listing_0012_example_array} powinno być
+zwrócone 101.
+
 \paragraph{Przeszukiwanie} Napisz funkcję \texttt{auto search(int a[], int n,
 int needle) -> int}, która w tablicy \texttt{a} o rozmiarze \texttt{n} będzie
 szukać wartości równej \texttt{needle}. Jeśli tablica zawiera taką wartość niech
-funkcja zwróci jej indeks; w przeciwnym wypadku niech zwróci -1.
+funkcja zwróci jej indeks; w przeciwnym wypadku niech zwróci -1. Przykładowa
+tablica do wykorzystania na listingu \ref{listing_0012_example_array}.
+
+Dla przykładowej tablicy z listingu \ref{listing_0012_example_array} i liczby
+101 powinno być zwrócone 6; dla liczby 0 powinno być zwrócone -1.
 
 \paragraph{Sortowanie} Napisz funkcję \texttt{auto sort\_asc(int a[], int n) ->
 void}, która ułoży liczby w tablicy \texttt{a} o rozmiarze \texttt{n} w
@@ -421,14 +452,17 @@ Wynik wydrukuj na \texttt{std::cout}.
 \begin{lstlisting}[caption={zamiana},
     captionpos=b,
     label=listing_0009_swap]
-$./program-zamiana$
-42 64
-64 42
+auto a = int{42};
+auto b = int{42};
+std::cout << a << " " << b << "\n";  $// 42 64$
+swap(&a, &b);
+std::cout << a << " " << b << "\n";  $// 64 42$
 \end{lstlisting}
 \end{figure}
 
 \paragraph{Zamiana} Napisz funkcję \texttt{swap()}, która będzie
-jako parametr przyjmować dwa wskaźniki na \texttt{int}.
+jako parametr przyjmować dwa wskaźniki na \texttt{int} i zamienia miejscami
+wartości zmiennych, na które te wskaźniki wskazują.
 
 W funkcji \texttt{main()} napisz kod, który wywołuje funkcję \texttt{swap()}.
 Wydrukuj wartość dwóch testowych liczb przed i po zamianie (patrz listing
@@ -436,13 +470,39 @@ Wydrukuj wartość dwóch testowych liczb przed i po zamianie (patrz listing
 
 Wynik wydrukuj na \texttt{std::cout}.
 
+\begin{figure}[!htp]
+\begin{lstlisting}[caption={dostęp do pojedynczych bajtów},
+    captionpos=b,
+    label=listing_0013_byte_access]
+auto memfoo(void* s, size_t n) -> void
+{
+    auto proxy = reinterpret_cast<char*>(s);
+    for (auto i = size_t{0}; i < n; ++i) {
+        proxy[n] = 0xa5;  $// overwrite n-th byte$
+    }
+}
+\end{lstlisting}
+\end{figure}
+
 \paragraph{\texttt{memset(3)}} Zaimplementuj funkcję \texttt{memset(3)}. Jej
 opis znajduje się w podręczniku użytkownika systemu. Można go wyświetlić
-używając polecenia `\texttt{man 3 memset}'.
+używając polecenia `\texttt{man 3 memset}'. Jak dostać się do pojedynczych
+bajtów w obszarze pamięci pokazuje listing \ref{listing_0013_byte_access}.
 
 \paragraph{\texttt{memcpy(3)}} Zaimplementuj funkcję \texttt{memcpy(3)}.
 
-\paragraph{\texttt{memfrob(3)}} Zaimplementuj funkcję \texttt{memfrob(3)}.
+\begin{figure}[!htp]
+\begin{lstlisting}[caption={frobnicate},
+    captionpos=b,
+    label=listing_0010_frob]
+auto x = uint8_t{64};
+x = (x ^ 42);  $// frobnicate; ie, use bitwise exclusive-or$
+\end{lstlisting}
+\end{figure}
+
+\paragraph{\texttt{memfrob(3)}} Zaimplementuj funkcję \texttt{memfrob(3)}. Jak
+działa operacja ,,bitwise exclusive-or'', pokazuje listing
+\ref{listing_0010_frob}.
 
 \paragraph{\texttt{memrev()}} Zaimplementuj funkcję \texttt{memrev(void* s,
 size\_t n)}, która odwróci kolejność bajtów w obszarze pamięci o rozmiarze
@@ -465,6 +525,7 @@ size\_t n)}, która wypełni losowymi bajtami obszar pamięci o rozmiarze
 auto some_function(int const) -> void;
 
 auto fp = &some_function; $// take address of some_function$
+
 (*fp)(42);                $// dereference is needed for the call$
 \end{lstlisting}}
 \end{figure}
@@ -530,10 +591,10 @@ porównywania elementów należy wykorzystać funkcję, której adres przekazany
 w parametrze \texttt{fp}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Struktury danych
+% Typy danych i struktury
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
-\section{Struktury danych}
+\section{Typy danych i struktury}
 
 Dla każdego zadania powinna być napisana funkcja \texttt{main()}, która będzie
 testować działanie zaimplementowanej struktury (lub struktur) danych wywołując
@@ -543,7 +604,168 @@ O ile nie jest powiedziane inaczej, w funkcji \texttt{main()} dane (np. długoś
 boków, ilości żyć, itd.) mogą być wpisane ,,na sztywno'' podczas tworzenia
 obiektów danej struktury danych i nie muszą być wczytywane od użytkownika.
 
-\begin{figure}[!htp]
+\subsection{Typy danych}
+
+\begin{figure}
+{\small
+\begin{lstlisting}[caption={\texttt{enum}},
+    captionpos=b,
+    label=listing_0015_enum]
+enum PERMISSION {
+    PERM_READ    = 1,  $// IMPORTANT: use powers of 2!$
+    PERM_WRITE   = 2,
+    PERM_EXECUTE = 4,
+};
+
+$// C-style$
+auto perm = PERM_READ|PERM_WRITE;
+
+$// check if read permission is enabled$
+auto const can_read = (perm & PERM_READ);
+\end{lstlisting}}
+\end{figure}
+
+\begin{figure}
+{\small
+\begin{lstlisting}[caption={\texttt{enum class}},
+    captionpos=b,
+    label=listing_0016_enum_class]
+enum class Permission {
+    Read,
+    Write,
+    Execute,
+};
+
+auto perm = std::set<Permission>{ Read, Write };
+
+$// check if read permission is enabled$
+auto const can_read = perm.count(Permission::Read);
+\end{lstlisting}}
+\end{figure}
+
+\begin{figure}
+{\small
+\begin{lstlisting}[caption={instrukcja switch (po \texttt{enum})},
+    captionpos=b,
+    label=listing_0017_switch_statement_over_enum]
+$// over C-style enum$
+switch (perm) {
+    case PERM_READ:
+        $// ...$
+        break;
+    case PERM_WRITE:
+        $// ...$
+        break;
+    case PERM_EXECUTE:
+        $// ...$
+        break;
+}
+\end{lstlisting}}
+\end{figure}
+
+\begin{figure}
+{\small
+\begin{lstlisting}[caption={instrukcja switch (po \texttt{enum class})},
+    captionpos=b,
+    label=listing_0017_switch_statement_over_enum_class]
+$// over C++ style enum class$
+switch (perm) {
+    case Permission::Read:
+        $// ...$
+        break;
+    case Permission::Write:
+        $// ...$
+        break;
+    case Permission::Execute:
+        $// ...$
+        break;
+}
+\end{lstlisting}}
+\end{figure}
+
+\begin{figure}
+\begin{enumerate}
+    \item bieganie
+    \item jeździectwo
+    \item kolarstwo
+    \item pływanie
+    \item rzut oszczepem
+    \item skok w dal
+    \item wspinaczkę
+    \item zapasy
+\end{enumerate}
+\caption{dyscypliny sportowe}
+\label{fig_0001_sport}
+\end{figure}
+
+\paragraph{Rozmiar typów} Napisz program, który wypisze
+na standardowy strumień wyjścia rozmiary typów: \texttt{char}, \texttt{int},
+\texttt{uint16\_t}, \texttt{uint32\_t}, \texttt{unsigned}, \texttt{long},
+\texttt{float} i \texttt{double}, \texttt{std::string}. Wykorzystaj do tego
+operator \texttt{sizeof}.
+
+\paragraph{Rozmiar wskaźników} Napisz program, który wypisze na standardowy
+strumień wyjścia rozmiary typów: \texttt{std::string}, \texttt{int*},
+\texttt{uint16\_t*} i \texttt{char*}. Wykorzystaj do tego operator
+\texttt{sizeof}. Z czego wynika to, że rozmiary typów są różne, ale rozmiar
+wskaźników zawsze taki sam?
+
+\paragraph{Triatlon (w stylu C)}\label{ex_0000_c_style_triathlon} Zaprojektuj
+typ wyliczeniowy w stylu C (przykład na listingu \ref{listing_0015_enum}), który
+będzie mógł reprezentować dyscypliny sportowe pokazane na rysynku
+\ref{fig_0001_sport} (na stronie \pageref{fig_0001_sport}). Następnie stwórz
+zmienną \texttt{triathlon}, która będzie reprezentować dyscypliny triatlonu
+czyli: bieganie, pływanie, i kolarstwo.
+
+\paragraph{Triatlon (w stylu C++)}\label{ex_0000_cxx_style_triathlon} Tak jak
+zadanie \ref{ex_0000_c_style_triathlon}, ale z wyliczeniem w stylu C++ (przykład
+na listingu \ref{listing_0016_enum_class}).
+
+\paragraph{Sportowiec (w stylu C)}\label{ex_0000_c_style_sportsman} Rozwiń kod z
+zadania \ref{ex_0000_c_style_triathlon}. Napisz funkcję o sygnaturze:
+\texttt{auto can\_into\_sport(int const sportsman, SPORT const sport) -> bool},
+która zwróci prawdę jeśli zmienna \texttt{sportsman} ma ustawiony bit
+odpowiadający za element wyliczenia typu \texttt{SPORT} podany w parametrze
+\texttt{sport}.
+
+W funkcji \texttt{main()} stwórz sportowca (zmienną), który będzie znał
+wszystkie sporty potrzebne do triatlonu. Użyj tej zmiennej do przetestowania
+funkcji \texttt{can\_into\_sport()} (przykład na listingu
+\ref{listing_0015_enum}):
+{\small
+\begin{lstlisting}
+auto const sportsman = $/* your code here */$;
+std::cout << "biega: " << can_into_sport(sportsman, SPORT_RUNNING) << "\n";
+$// same test for swimming and cycling: can_into_sport(sportsman, ...)$
+\end{lstlisting}}
+
+\paragraph{Sportowiec (w stylu C++)}\label{ex_0000_cxx_style_sportsman} Rozwiń kod z
+zadania \ref{ex_0000_cxx_style_triathlon}. Napisz funkcję o sygnaturze:
+\texttt{auto can\_into\_sport(std::set<Sport> const sportsman, Sport const sport) -> bool},
+która zwróci prawdę jeśli zmienna \texttt{sportsman} zawiera element wyliczenia
+typu \texttt{Sport} odpowiadający za sport przekazany w parametrze
+\texttt{sport}.
+
+W funkcji \texttt{main()} stwórz sportowca (zmienną), który będzie znał
+wszystkie sporty potrzebne do triatlonu. Użyj tej zmiennej do przetestowania
+funkcji \texttt{can\_into\_sport()} (przykład na listingu
+\ref{listing_0016_enum_class}).
+
+\paragraph{Konwersja na napisy} Napisz funkcję \texttt{auto to\_string(SPORT
+const) -> std::string}, która będzie zamieniać wartości
+wyliczenia z zadania \ref{ex_0000_c_style_triathlon} na typ
+\texttt{std::string}. Wykorzystaj instrukcję \texttt{switch} (przykład na
+listingu \ref{listing_0017_switch_statement_over_enum}).
+
+\paragraph{Konwersja na napisy (2)} Napisz \texttt{auto to\_string(Sport
+const) -> std::string}, która będzie zamieniać wartości
+wyliczenia z zadania \ref{ex_0000_cxx_style_triathlon} na typ
+\texttt{std::string}. Wykorzystaj instrukcję \texttt{switch} (przykład na
+listingu \ref{listing_0017_switch_statement_over_enum_class}).
+
+\subsection{Struktury}
+
+\begin{figure}
 {\small
 \begin{lstlisting}[caption={struct},
     captionpos=b,
@@ -564,7 +786,7 @@ auto A_type::member_function() -> std::string
 \end{lstlisting}}
 \end{figure}
 
-\begin{figure}[!htp]
+\begin{figure}
 {\small
 \begin{lstlisting}[caption={konstruktor},
     captionpos=b,
@@ -625,7 +847,7 @@ Dodaj do struktury funkcję składową \texttt{auto to\_string() const ->
 std::string}, która będzie produkować napisy reprezentujące temperaturę (tj.
 ilość stopni, spacja, i `\texttt{°C}').
 
-\begin{figure}[!htp]
+\begin{figure}
 {\small
 \begin{lstlisting}[caption={struktura reprezentująca temperaturę w °C},
     captionpos=b,
@@ -668,7 +890,7 @@ listingu \ref{listing_0000_operator_implemetation}.
 Przykładowa implementacja operatorów pokazana jest na
 listingu \ref{listing_0000_operator_implemetation}.
 
-\begin{figure}[!htp]
+\begin{figure}
 {\small
 \begin{lstlisting}[caption={implementacja operatora},
     captionpos=b,
@@ -696,6 +918,23 @@ auto Foo::operator<(Foo const& x) const -> bool
 \end{lstlisting}}
 \end{figure}
 
+\begin{figure}
+{\small
+\begin{lstlisting}[caption={konstruktory budujące temperaturę w °C z innych skal},
+    captionpos=b,
+    label=listing_0014_ctor_conversion]
+struct Celsius {
+    $// ...$
+
+    $// conversion from type K$
+    Celsius(K const&);
+
+    $// conversion from type Fahrenheit$
+    Celsius(Fahrenheit const&);
+};
+\end{lstlisting}}
+\end{figure}
+
 \paragraph{Konwersje} Do struktur danych napisanych w zadaniach
 \ref{ex_0000_struct_temperature_celsius},
 \ref{ex_0000_struct_temperature_fahrenheit}, i
@@ -711,6 +950,7 @@ to:
     \item z K na °C (sygnatura \texttt{Celsius(Kelvin const)})
     \item z K na °F (sygnatura \texttt{Fahrenheit(Kelvin const)})
 \end{enumerate}
+Przykład konstruktorów widać na listingu \ref{listing_0014_ctor_conversion}.
 
 \paragraph{Kąt (stopnie)} Zaprojektuj strukturę danych, która będzie reprezentować miarę
 kąta\footnote{\url{https://pl.wikipedia.org/wiki/Miara_k\%C4\%85ta}} z użyciem miary
