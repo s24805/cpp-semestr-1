@@ -13,8 +13,7 @@ CXXFLAGS=\
 		 -g \
 		 -std=$(CXXSTD) \
 		 $(CXXWARNINGS) \
-		 $(CXXINCLUDES) \
-		 -lpthread
+		 $(CXXINCLUDES)
 
 all:\
 	build/00-hello-world.bin \
@@ -40,7 +39,7 @@ list:
 		sed -e 's:\./src/::' -e 's/\.cpp\>//'
 
 build/%.bin: build/%.o
-	$(CXX) $(CXXFLAGS) -o $@ $<
+	$(CXX) $(CXXFLAGS) -o $@ $< -lpthread
 
 build/%.o: src/%.cpp
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
