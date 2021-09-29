@@ -5,7 +5,7 @@
 
 #include <iostream>
 
-
+//komentarz
 auto main() -> int
 {
     std::cout << "Hello, World!\n";
