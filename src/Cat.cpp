@@ -14,11 +14,7 @@ auto s42::Cat::adopt_cat(std::string new_name) const -> Cat
 auto s42::Cat::make_sound() const -> std::string
 {
     auto out = std::ostringstream{};
-    out << "Meow! ("
-        << name
-        << ", with "
-        << lives_left
-        << " lives left)";
+    out << "Meow! (" << name << ", with " << lives_left << " lives left)";
     return out.str();
 }
 

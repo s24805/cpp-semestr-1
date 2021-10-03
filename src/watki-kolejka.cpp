@@ -8,15 +8,13 @@
 #include <thread>
 
 
-auto print_stuff_from_queue(
-    std::queue<std::string>& k
-    , std::mutex& mtx
-    , std::condition_variable& cv
-    , int const id
-) -> void
+auto print_stuff_from_queue(std::queue<std::string>& k,
+                            std::mutex& mtx,
+                            std::condition_variable& cv,
+                            int const id) -> void
 {
     while (true) {
-        std::unique_lock lck { mtx };
+        std::unique_lock lck{mtx};
         cv.wait(lck);
 
         if (k.empty()) {
@@ -45,19 +43,9 @@ auto main() -> int
     std::condition_variable cv;
 
     auto t0 = std::thread{
-        print_stuff_from_queue
-        , std::ref(k)
-        , std::ref(mtx)
-        , std::ref(cv)
-        , 0
-    };
+        print_stuff_from_queue, std::ref(k), std::ref(mtx), std::ref(cv), 0};
     auto t1 = std::thread{
-        print_stuff_from_queue
-        , std::ref(k)
-        , std::ref(mtx)
-        , std::ref(cv)
-        , 1
-    };
+        print_stuff_from_queue, std::ref(k), std::ref(mtx), std::ref(cv), 1};
 
     auto done = 0;
 
@@ -71,7 +59,7 @@ auto main() -> int
         }
 
         {
-            std::unique_lock<std::mutex> lck { mtx };
+            std::unique_lock<std::mutex> lck{mtx};
             k.push(std::move(line));
         }
         cv.notify_one();

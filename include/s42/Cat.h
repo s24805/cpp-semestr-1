@@ -9,7 +9,7 @@ namespace s42 {
 
 struct Cat {
     std::string const name;
-    constexpr static unsigned LIVES_LEFT { 9 };
+    constexpr static unsigned LIVES_LEFT{9};
     unsigned lives_left{LIVES_LEFT};
 
     Cat(std::string, unsigned const = LIVES_LEFT);

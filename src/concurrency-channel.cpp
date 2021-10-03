@@ -1,9 +1,9 @@
+#include <itp/channel.h>
+
 #include <chrono>
 #include <iostream>
-#include <thread>
 #include <string>
-
-#include <itp/channel.h>
+#include <thread>
 
 
 auto printer(itp::channel<std::string>& ch) -> void

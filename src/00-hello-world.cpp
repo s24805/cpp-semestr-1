@@ -4,10 +4,27 @@
 
 
 #include <iostream>
+#include <string>
 
-//komentarz changed
+auto zapytaj() -> int
+{
+    int x;
+std::string s = "Podaj liczbe: ";
+    std::cout << s;
+    std::cin >> x;
+    return x;
+}
+
+// komentarz changed
 auto main() -> int
 {
-    std::cout << "Hello, World!\n";
+    std::cout << "Hello, AAAA!\n";
+
+    int a, b;
+
+    a = zapytaj();
+    b = zapytaj();
+    std::cout << "suma: " << a+b << "\n";
+
     return 0;
 }
