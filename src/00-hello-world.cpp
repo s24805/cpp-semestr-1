@@ -4,10 +4,10 @@
 
 
 #include <iostream>
-
+using namespace std;
 auto main() -> int
 {
-    std::cout << "Hello, World\n";
-    std::cout << "xxx";
-    return 0;
+   cout << "hejka"<<end;
+   cout << "dawuid";
+    return 0000;
 }
