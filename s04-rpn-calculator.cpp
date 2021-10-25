@@ -46,9 +46,12 @@ if(j=="**")
 cout<<"podaj dwie liczby"<<endl;
 cin>>k;
 cin>>x;
+h=k;
 for(int i=0;i<x;i++)
 {
+ if(h!=k)
 h=h*k;
+else h=h*k;
 }
 cout<<h;
 }
@@ -66,3 +69,4 @@ cin>>a;
 cout<<"odwrotnoscia liczby a jest 1/"<<a;
 }
 return 69;}
+
