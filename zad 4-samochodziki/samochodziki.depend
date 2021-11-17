@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1637166266 source:c:\users\s24805\documents\code blocks\samochodziki\jd.cpp
+	<iostream>
+	<string>
+	"byle co.h"
+
+1637166266 c:\users\s24805\documents\code blocks\samochodziki\byle co.h
+	<iostream>
+	<string>
+
+1637166095 source:c:\users\s24805\documents\code blocks\samochodziki\main.cpp
+	<iostream>
+	"byle co.h"
+
