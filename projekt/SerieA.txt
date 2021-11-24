@@ -1,0 +1,20 @@
+1.Inter Mediolan
+2.AC Milan
+3.Atlanta Bergamo
+4.Juventus FC
+5.SSC Napoli
+6.S.S. Lazio
+7.US Sassuolo
+8.AS Roma
+9.Sampdoria Genua
+10.Hellas Verona
+11.Genoa CFC
+12.Bologna FC
+13.ACF Fiorentina
+14.Udinese Calcio
+15.Spezia Calcio
+16.Cagliari Calcio
+17.Torino FC
+18.Benevento Calcio
+19.FC Crotone
+20.Parma Calcio 1913
