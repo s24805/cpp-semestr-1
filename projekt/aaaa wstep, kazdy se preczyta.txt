@@ -1,0 +1,16 @@
+witam panuf serdecznie
+Kacper odpowiada za szkielecik i lige angielska
+Dawid bierze Wloska
+do wyboru zostala hiszpanska i niemiecka, kto pierwszy ten lepszy. wpiszcie tu kto co wybral
+bierzemy sezon 2020/21
+optymalna formacja to 4-4-2 (1 bram 4 obr 4 pom 2 nap)
+w takiej kolejnosci piszemy w pliku txt,czyli np.
+Wojtek Szczesny
+Lukasz Piszczek
+itd
+jesli pedal z brazyli nazywa sie tylko Dante czy inny Nejmar, i tak wpisujemy imie i nazwisko
+jesli jakis holender nazywa sie Max von der sraken pierdaken, wpisujemy imie i nazwisko.
+pilkarz ma miec Imie Nazwisko, statystyki dopiszmy pozniej, gdy zadecydujemy jakie i ile ich wstawic
+robimy na wywaleniu, inni oddaja projekt liczacy pola figur, szanujmy sie, nie bedziemy wymyslac
+z roznymi formacjami. jesli nie znajdziemy statystyk zawodnika, wymyslimy swoje. po to bozia dala oczy zeby robic na oko
+najwyzej jak bedzie nam sie pozniej chcialo to zmienimy to na lepsze (i tak tego nie zrobimy)
