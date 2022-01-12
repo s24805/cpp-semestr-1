@@ -7,34 +7,22 @@ bool  is_divisible(int j,int d)
     else
         return false;
 }
-void is_even(int a,int b)
+bool is_even(int a)
 {
-    if(is_divisible(a,b)==true)
-    {
-    if(a/b%2==0)
-        {
-            cout<<a<<" : "<<b<<" = "<<a/b<<endl;;
-            cout<<"jest parzysta";
-        }
-    else
-        {
-        cout<<a<<" : "<<b<<" = "<<a/b<<endl;
-        cout<<"jest nieparzysta";
-        }
+ if(is_divisible(a,2)==true)
+ {
+     cout<<"ta liczba jest parzysta"<<endl;
+ }
+else
+    cout<<"ta liczba jest nieparzysta"<<endl;
     }
-    else cout<<"podane liczby sa niepodzielne";
-}
 int main()
 {
-int jd,dziel;
+int jd;
 cout<<"podakj liczbe"<<endl;
 cin>>jd;
-cout<<"podaj liczbe, przez ktora bedzie dzielnoa"<<endl;
-cin>>dziel;
-is_even(jd,dziel);
+is_even(jd);
 return 213;
 //if(even(jd)==true)
  //   cout<<"jest parzysta";
 }
-
-
